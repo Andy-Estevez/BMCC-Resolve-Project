@@ -1,0 +1,168 @@
+/*
+    Andy Estevez
+    BMCC Tech Innovation Hub Internship
+    Spring Semester 2024
+    BMCC INC Grade Project
+    CSS Stylesheet
+*/
+
+:root {
+    --BMCC-Blue: #0058A4;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    margin-top: 75px;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: var(--BMCC-Blue);
+}
+
+h3 {
+    color: var(--BMCC-Blue);
+}
+
+nav {
+    height: 75px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(var(--BMCC-Blue), #004894);
+    z-index: 1;
+}
+
+.NavButtonsContainer {
+    height: 50px;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 125px;
+    margin-top: 12.5px;
+}
+
+.navButton {
+    height: 35px;
+    width: 127.5px;
+    margin-top: 7.5px;
+    background-color: rgb(230, 230, 230);
+    border-color: rgba(230, 230, 230, 0);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--BMCC-Blue);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.navButton:hover {
+    background-color: rgb(205, 225, 245);
+    border-color: rgba(145, 165, 185, 255);
+}
+
+.BMCCLogo {
+    margin-left: 125px;
+    margin-top: 12.5px;
+}
+
+footer {
+    height: 100px;
+    width: 100vw;
+    max-width: 100%;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(var(--BMCC-Blue), #004894);
+}
+
+footer.abs {
+    position: absolute;
+}
+
+.footerText {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+}
+
+.footerLink {
+    text-decoration: none;
+}
+
+.contentBlock {
+    min-height: calc(100vh - 175px);
+    height: fit-content;
+    width: calc(100vw - 250px);
+    margin: 0 auto;
+}
+
+.gradesHolder {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.gradeBlock {
+    height: calc(50vh - 91px);
+    width: 50%;
+    border-width: 2px;
+    border-top-style: solid;
+    border-top-color: rgb(225, 225, 225);
+    border-bottom-style: solid;
+    border-bottom-color: rgb(225, 225, 225);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.gradeHeader {
+    color: var(--BMCC-Blue);
+    text-align: center;
+    padding-top: 25px;
+}
+
+.homeGradeHeader {
+    padding-top: 0;
+}
+
+.gradeSummary {
+	display: inline-block;
+    text-align: left;
+}
+
+.gradeSummaryContainer {
+    text-align: center;
+    margin-top: -20px;
+}
+
+.gradeButton {
+    height: 30px;
+    width: 90px;
+    margin-bottom: 20px;
+    align-self: center;
+    background-color: var(--BMCC-Blue);
+    border-color: rgba(230, 230, 230, 0);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.gradeButton:hover {
+    background-color: #004894;
+    border-color: rgba(145, 165, 185, 255);
+}
