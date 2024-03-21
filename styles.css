@@ -6,6 +6,8 @@
     CSS Stylesheet
 */
 
+/* General Website */
+
 :root {
     --BMCC-Blue: #0058A4;
     font-family: Helvetica, sans-serif;
@@ -13,7 +15,7 @@
 
 body {
     margin: 0;
-    margin-top: 75px;
+    /*margin-top: 75px;*/
 }
 
 button {
@@ -28,12 +30,16 @@ h3 {
     color: var(--BMCC-Blue);
 }
 
+hr {
+    margin: 0;
+}
+
+/* Header / Navigation Bar */
+
 nav {
     height: 75px;
     width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
     background: linear-gradient(var(--BMCC-Blue), #004894);
@@ -42,16 +48,20 @@ nav {
 
 .NavButtonsContainer {
     height: 50px;
-    width: 270px;
+    width: 350px;
     display: flex;
     justify-content: space-between;
     margin-right: 125px;
     margin-top: 12.5px;
 }
 
+.NavButtonsContainer#console {
+    justify-content: right;
+}
+
 .navButton {
     height: 35px;
-    width: 127.5px;
+    width: 30%;
     margin-top: 7.5px;
     background-color: rgb(255, 255, 255);
     border-color: rgba(230, 230, 230, 0);
@@ -69,10 +79,24 @@ nav {
     border-color: rgba(145, 165, 185, 255);
 }
 
+.navButton#login {
+    background-color: var(--BMCC-Blue);
+    border-color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.navButton#login:hover {
+    background-color: rgb(0, 75, 125);
+}
+
 .BMCCLogo {
     margin-left: 125px;
     margin-top: 12.5px;
 }
+
+/* Footer */
 
 footer {
     height: 100px;
@@ -100,6 +124,8 @@ footer.abs {
     text-decoration: none;
 }
 
+/* Index / Landing Page */
+
 .contentBlock {
     min-height: calc(100vh - 175px);
     height: fit-content;
@@ -108,12 +134,14 @@ footer.abs {
 }
 
 .gradesHolder {
+    min-height: calc(100vh - 175px);
+    height: fit-content;
     display: flex;
     flex-flow: row wrap;
 }
 
 .gradeBlock {
-    height: calc(50vh - 91px);
+    height: auto;
     width: 50%;
     border-width: 2px;
     border-top-style: solid;
@@ -129,15 +157,16 @@ footer.abs {
 .gradeHeader {
     color: var(--BMCC-Blue);
     text-align: center;
-    padding-top: 25px;
+    margin: 0;
+    padding-top: 20px;
 }
 
 .homeGradeHeader {
-    padding-top: 0;
+    padding: 20px;
 }
 
 .gradeSummary {
-	display: inline-block;
+    display: inline-block;
     text-align: left;
 }
 
@@ -165,4 +194,203 @@ footer.abs {
 .gradeButton:hover {
     background-color: #004894;
     border-color: rgba(145, 165, 185, 255);
+}
+
+/* Log In / Sign Up Pages */
+
+.loginBody {
+    background-image: url('Elements/BMCC-logo-no-type-gray.png');
+    background-size: 100px;
+    animation: animate-loginBody-bg 5s infinite linear;
+}
+
+@keyframes animate-loginBody-bg {
+    100% {
+        background-position: 100px 100px;
+    }
+}
+
+.loginDiv {
+    height: calc(100vh - 325px);
+    width: 40vw;
+    margin: 75px auto 75px auto;
+    background: linear-gradient(var(--BMCC-Blue), #004894);
+    border-radius: 15px;
+}
+
+.loginHeader {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+    padding: 30px;
+}
+
+.loginForm {
+    height: calc(100% - 130px);
+    background-color: #003884;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.loginFormElement {
+    width: 255px;
+    height: 30px;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input[type="radio"] {
+    background-color: red;
+    display: inline;
+    margin: 0;
+}
+
+label {
+    color: white;
+    margin: 0 15px;
+}
+
+.loginFormButton {
+    display: block;
+    width: 30%;
+    height: 25px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgba(230, 230, 230, 0);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--BMCC-Blue);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.loginFormButton:hover {
+    background-color: rgb(205, 225, 245);
+    border-color: rgba(145, 165, 185, 255);
+}
+
+.registerLink {
+    display: block;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+}
+
+/* Student Console Page */
+
+.classesBlock {
+    width: 50vw;
+    height: calc(100vh - 325px);
+    margin: 75px auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background: linear-gradient(var(--BMCC-Blue), #004894);
+}
+
+.classesBlockHeader {
+    color: white;
+    text-align: center;
+}
+
+.classesBlockBody {
+    flex: 1;
+    margin: 0 16px 16px 16px;
+    overflow: auto;
+    border-width: 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 15px;
+    background-color: #003884;
+}
+
+.classLink {
+    text-decoration: none;
+}
+
+.classBlockItem {
+    border-style: solid;
+    border-color: white;
+    border-width: 0 0 0px 0;
+    overflow: hidden;
+    transition: background-color 0.25s;
+}
+
+.classBlockItem:hover {
+    background-color: #002874;
+}
+
+.classBlockItemInfo {
+    color: white;
+    font-weight: normal;
+    text-align: center;
+}
+
+/* Student Class Viewer Page */
+
+.classInfo {
+    width: 100vw;
+    max-width: 100%;
+    overflow: hidden;
+    border-top: 2px solid rgb(200, 200, 200);
+    border-bottom: 2px solid rgb(200, 200, 200);
+    background-color: #003884;
+}
+
+.assignmentBlock {
+    width: calc(100vw - 250px);
+    height: fit-content;
+    overflow: hidden;
+    margin: 25px auto 25px auto;
+    border-radius: 15px;
+    text-align: center;
+    background: linear-gradient(var(--BMCC-Blue), #004894);
+}
+
+.assignmentText {
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 25px;
+    color: white;
+}
+
+.assignmentButton {
+    height: 35px;
+    width: 20%;
+    margin: 20px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgba(230, 230, 230, 0);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--BMCC-Blue);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.assignmentButton:hover {
+    background-color: rgb(205, 225, 245);
+    border-color: rgba(145, 165, 185, 255);
+}
+
+.assignmentButtonDis {
+    height: 35px;
+    width: 20%;
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(230, 230, 230, 0);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--BMCC-Blue);
+    cursor: default;
 }
