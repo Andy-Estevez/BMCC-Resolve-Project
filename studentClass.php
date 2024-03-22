@@ -11,6 +11,8 @@
     include("functions.php");
 
     $user_data = check_student_login($conn);
+
+    $classID = $_GET["cID"];
 ?>
 
 <!DOCTYPE html>
@@ -31,14 +33,12 @@
             </a>
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Classes</button>
-                <button type="button" class="navButton" onclick="location.href='profile.php'">Profile</button>
+                <button type="button" class="navButton" onclick="location.href='studentProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
         </nav>
 
         <?php
-            $classID = $_GET["cID"];
-
             // Class Info Banner
             $classQuery = "SELECT * 
                             FROM classes AS c
@@ -89,7 +89,7 @@
                                 <p class='assignmentText'><strong>Grade</strong>: $assignment[grade]</p>
                                 <hr>
 
-                                <button type='button' class='assignmentButton' onclick='location.href=\"submitAssignment.php?aID=$assignment[assignmentID]&cID=$classID\"'>Mark As Complete</button>
+                                <button type='button' class='assignmentButton' onclick='location.href=\"submitAssignmentConfirm.php?aT=$assignment[title]&aID=$assignment[assignmentID]&cID=$classID\"'>Mark As Complete</button>
                             </div>
                         ");
                     }
@@ -99,7 +99,7 @@
                                 <p class='assignmentText'><strong>Grade</strong>: $assignment[grade]</p>
                                 <hr>
 
-                                <button type='button' class='assignmentButtonDis' disabled'>Submitted</button>
+                                <button type='button' class='assignmentButtonDis' disabled'>Turned In</button>
                             </div>
                         ");
                     }
@@ -109,7 +109,7 @@
                                 <p class='assignmentText'><strong>Grade</strong>: $assignment[grade]</p>
                                 <hr>
 
-                                <button type='button' class='assignmentButtonDis' disabled'>Submitted</button>
+                                <button type='button' class='assignmentButtonDis' disabled'>Turned In</button>
                             </div>
                         ");
                     }
@@ -119,7 +119,7 @@
                 }
             }
             else {
-                echo("No assignments");
+                echo("<h3 style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, 0)'>You do not have any assignments.</h3>");
             }
         ?>
     </body>
