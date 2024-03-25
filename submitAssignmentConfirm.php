@@ -12,9 +12,9 @@
 
     $user_data = check_student_login($conn);
 
-    $assignmentTitle = $_GET["aT"];
-    $assignmentID = $_GET["aID"];
-    $classID = $_GET["cID"];
+    $assignmentTitle = urldecode($_GET["aT"]);
+    $assignmentID = urldecode($_GET["aID"]);
+    $classID = urldecode($_GET["cID"]);
 ?>
 
 <!DOCTYPE html>

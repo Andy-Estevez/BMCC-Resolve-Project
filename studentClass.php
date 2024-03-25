@@ -67,13 +67,18 @@
 
             $assignmentsResult = mysqli_query($conn, $assignmentsQuery);
 
+            // Fetch Assignments
             if ($assignmentsResult && mysqli_num_rows($assignmentsResult) > 0) {
                 while ($assignment = mysqli_fetch_assoc($assignmentsResult)) {
                     // Display Assignment Information
                     echo("
                         <div class='assignmentBlock'>
                             <h2 class='classBlockItemInfo'>$assignment[title]</h2>
-                            <hr>
+                            
+
+                            <div class='assignmentBlockBody'>
+
+                            
 
                             <h4 class='assignmentText'>Assignment Description:</h4>
                             <p class='assignmentText'>$assignment[description]</p>
@@ -82,14 +87,18 @@
                             <p class='assignmentText'><strong>Due Date</strong>: $assignment[dueDate]</p>
                     ");
 
-                    // Display Assignment Completion Status & Remaining Information
+                    // Encode Assignment Title To Safeguard URL
+                    $assignmentTitleEnc = urlencode($assignment["title"]);
+
+                    // Display Assignment Completion Status, Set Up Submission Button, & Insert Remaining Information
                     if ($assignment["completionStatus"] == 0) {
                         echo("
                                 <p class='assignmentText'><strong>Status</strong>: Incomplete</p>
                                 <p class='assignmentText'><strong>Grade</strong>: $assignment[grade]</p>
-                                <hr>
+                                
 
-                                <button type='button' class='assignmentButton' onclick='location.href=\"submitAssignmentConfirm.php?aT=$assignment[title]&aID=$assignment[assignmentID]&cID=$classID\"'>Mark As Complete</button>
+                                </div>
+                                <button type='button' class='assignmentButton' onclick='location.href=\"submitAssignmentConfirm.php?aT=$assignmentTitleEnc&aID=$assignment[assignmentID]&cID=$classID\"'>Mark As Complete</button>
                             </div>
                         ");
                     }
@@ -97,7 +106,8 @@
                         echo("
                                 <p class='assignmentText'><strong>Status</strong>: Pending</p>
                                 <p class='assignmentText'><strong>Grade</strong>: $assignment[grade]</p>
-                                <hr>
+                                
+                                </div>
 
                                 <button type='button' class='assignmentButtonDis' disabled'>Turned In</button>
                             </div>
@@ -107,7 +117,8 @@
                         echo("
                                 <p class='assignmentText'><strong>Status</strong>: Complete</p>
                                 <p class='assignmentText'><strong>Grade</strong>: $assignment[grade]</p>
-                                <hr>
+                                
+                                </div>
 
                                 <button type='button' class='assignmentButtonDis' disabled'>Turned In</button>
                             </div>
@@ -119,6 +130,7 @@
                 }
             }
             else {
+                // If No Assignments Are Found
                 echo("<h3 style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, 0)'>You do not have any assignments.</h3>");
             }
         ?>
