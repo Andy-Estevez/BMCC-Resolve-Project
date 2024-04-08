@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <!-- Andy Estevez -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
@@ -10,11 +12,13 @@
     include("config.php");
     include("functions.php");
 
+    // When Log In Form Is Submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $accountType = $_POST["accountType"];
         $email = $_POST["email"];
         $password = $_POST["password"];
 
+        // Verify Whether Email/Password Are Filled Out
         if (!empty($email) && !empty($password)) {
             if ($accountType == "student") {
                 $query = "select * from students where email = '$email' limit 1";
@@ -26,12 +30,17 @@
                 die("ERROR: Invalid account type during account log in.");
             }
 
+            // THIS COULD USE SOME POTENTIAL IMPROVEMENTS ^
+
             $result = mysqli_query($conn, $query);
 
+            // If Account Is Found
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
                     
+                // If Password Matches
                 if ($user_data["password"] === $password) {
+                    // Init Session Data & Redirect User To Appropriate Console
                     if ($accountType == "student") {
                         $_SESSION["studentID"] = $user_data["studentID"];
                         header("Location: studentConsole.php");
@@ -39,7 +48,7 @@
                     }
                     else if ($accountType == "faculty") {
                         $_SESSION["facultyID"] = $user_data["facultyID"];
-                        header("Location: facultyConsole.php");
+                        header("Location: facultyConsoleClasses.php");
                         die;
                     }
                     else {
@@ -48,15 +57,13 @@
                 }
             }
 
-            /* Handle Wrong Input Here */
+            /* Handle Incorrect Input Here */
         }
         else {
             /* Handle Invalid Input Here */
         }
     }
 ?>
-
-<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -83,12 +90,9 @@
 
             <!-- Log In Form -->
             <form class="loginForm" method="post">
-                <!-- Email Field -->
                 <input type="email" name="email" class="loginFormElement" placeholder="Enter Email" autocomplete="email">
-                <!-- Password Field -->
                 <input type="password" name="password" class="loginFormElement" placeholder="Enter Password">
 
-                <!-- Account Type Selector -->
                 <div>
                     <label>
                         <input type="radio" name="accountType" value="student" checked>Student
@@ -98,10 +102,8 @@
                     </label>
                 </div>
 
-                <!-- Submission Button -->
                 <input type="submit" value="Log In" class="loginFormButton">
 
-                <!-- Link To Registration (Redirection) -->
                 <a class="registerLink" href="signup.php">Don't have an account? Register here.</a>
             </form>
         </div>

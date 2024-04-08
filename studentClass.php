@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <!-- Andy Estevez -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
@@ -11,11 +13,8 @@
     include("functions.php");
 
     $user_data = check_student_login($conn);
-
     $classID = $_GET["cID"];
 ?>
-
-<!DOCTYPE html>
 
 <html lang="en">
     <head>

@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <!-- Andy Estevez -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
@@ -10,15 +12,19 @@
     include("config.php");
     include("functions.php");
 
+    // When Sign Up Form Is Submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $accountType = $_POST["accountType"];
         $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
 
+        // Verify Whether Username/Email/Password Are Filled Out
         if (!empty($username) && !empty($email) && !empty($password)) {
+            // Generate User ID
             $user_id = random_num(10);
             
+            // Construct Appropriate Query
             if ($accountType == "student") {
                 $query = "insert into students (studentID, username, email, password) values ('$user_id', '$username', '$email', '$password')";
             }
@@ -29,17 +35,20 @@
                 die("ERROR: Invalid account type during account registration.");
             }
 
-            mysqli_query($conn, $query);
-            header("Location: login.php");
-            die;
+            // Insert Account Data & Verify Insertion
+            if (mysqli_query($conn, $query)) {
+                header("Location: login.php");
+                die;
+            }
+            else {
+                die("ERROR: Account sign up failed.");
+            }
         }
         else {
             echo("The input information is invalid.");
         }
     }
 ?>
-
-<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -66,14 +75,10 @@
 
             <!-- Registration Form -->
             <form class="loginForm" method="post">
-                <!-- Username Field -->
                 <input type="text" name="username" class="loginFormElement" placeholder="Enter Name" autocomplete="name">
-                <!-- Email Field -->
                 <input type="email" name="email" class="loginFormElement" placeholder="Enter Email" autocomplete="email">
-                <!-- Password Field -->
                 <input type="password" name="password" class="loginFormElement" placeholder="Enter Password">
 
-                <!-- Account Type Selector -->
                 <div>
                     <label>
                         <input type="radio" name="accountType" value="student" checked>Student
@@ -83,10 +88,8 @@
                     </label>
                 </div>
 
-                <!-- Submission Button -->
                 <input type="submit" value="Register" class="loginFormButton">
 
-                <!-- Link To Log In (Redirection) -->
                 <a class="registerLink" href="login.php">Already have an account? Log in here.</a>
             </form>
         </div>

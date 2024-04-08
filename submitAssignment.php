@@ -11,16 +11,15 @@
     include("functions.php");
 
     $user_data = check_student_login($conn);
-
     $assignmentID = $_GET["aID"];
     $classID = $_GET["cID"];
 
     $updateQuery = "UPDATE stutoassignmentmap SET completionStatus = 1 WHERE assignmentID = $assignmentID";
-    $updateResult = mysqli_query($conn, $updateQuery);
 
-    if ($updateResult) {
+    // Update Assignment Data & Verify Update
+    if (mysqli_query($conn, $updateQuery)) {
         header("Location: studentClass.php?cID=$classID");
     } else {
-        die("Error turning in assignment.");
+        die("ERROR: Failed to turn in assignment.");
     }
 ?>

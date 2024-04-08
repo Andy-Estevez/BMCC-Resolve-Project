@@ -4,7 +4,7 @@
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC INC Grade Project -->
-<!-- Student Profile Page -->
+<!-- Faculty Profile Page -->
 
 <?php
     session_start();
@@ -12,7 +12,7 @@
     include("config.php");
     include("functions.php");
 
-    $user_data = check_student_login($conn);
+    $user_data = check_faculty_login($conn);
 ?>
 
 <html lang="en">
@@ -20,7 +20,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades Student Profile</title>
+        <title>BMCC Grades faculty Profile</title>
     </head>
 
     <body>
@@ -30,8 +30,8 @@
                 <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
             </a>
             <div class="NavButtonsContainer">
-                <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Classes</button>
-                <button type="button" class="navButton" onclick="location.href='studentProfile.php'">Profile</button>
+                <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Classes</button>
+                <button type="button" class="navButton" onclick="location.href='facultyProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
         </nav>
@@ -46,7 +46,7 @@
                     echo("
                         <p class='profileText'><strong>Username</strong>: $user_data[username]</p>
                         <hr>
-                        <p class='profileText'><strong>UserID</strong>: $user_data[studentID]</p>
+                        <p class='profileText'><strong>UserID</strong>: $user_data[facultyID]</p>
                         <hr>
                         <p class='profileText'><strong>Email</strong>: $user_data[email]</p>
                     ");

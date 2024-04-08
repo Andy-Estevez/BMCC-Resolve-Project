@@ -6,7 +6,9 @@
     CSS Stylesheet
 */
 
+/* ~~~~~~~~~~~~~~~ */
 /* General Website */
+/* ~~~~~~~~~~~~~~~ */
 
 :root {
     --BMCC-Blue: #0058A4;
@@ -34,7 +36,9 @@ hr {
     margin: 0;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~ */
 /* Header / Navigation Bar */
+/* ~~~~~~~~~~~~~~~~~~~~~~~ */
 
 nav {
     height: 75px;
@@ -96,7 +100,9 @@ nav {
     margin-top: 12.5px;
 }
 
+/* ~~~~~~ */
 /* Footer */
+/* ~~~~~~ */
 
 footer {
     height: 100px;
@@ -124,7 +130,9 @@ footer.abs {
     text-decoration: none;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~ */
 /* Index / Landing Page */
+/* ~~~~~~~~~~~~~~~~~~~~ */
 
 .contentBlock {
     min-height: calc(100vh - 175px);
@@ -196,7 +204,9 @@ footer.abs {
     border-color: rgba(145, 165, 185, 255);
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~ */
 /* Log In / Sign Up Pages */
+/* ~~~~~~~~~~~~~~~~~~~~~~ */
 
 .loginBody, .assignmentConfirmBody {
     background-image: url('Elements/BMCC-logo-no-type-gray.png');
@@ -283,7 +293,9 @@ label {
     text-align: center;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~ */
 /* Student Console Page */
+/* ~~~~~~~~~~~~~~~~~~~~ */
 
 .classesBlock {
     width: 50vw;
@@ -335,7 +347,9 @@ label {
     text-align: center;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~ */
 /* Student Profile Page */
+/* ~~~~~~~~~~~~~~~~~~~~ */
 
 .profileDiv {
     height: calc(100vh - 325px);
@@ -364,7 +378,9 @@ label {
     margin-left: 15px;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* Student Class Viewer Page */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .classInfo {
     width: 100vw;
@@ -436,7 +452,9 @@ label {
     cursor: default;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* Student Assignment Confirmation Page */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .confDiv {
     height: calc(100vh - 179px);
@@ -483,4 +501,43 @@ label {
 
 .confButton:hover {
     background-color: rgb(205, 225, 245);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~ */
+/* Faculty Console Page */
+/* ~~~~~~~~~~~~~~~~~~~~ */
+
+.facultyClassesBlockHead {
+    margin: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.facultyConsoleButton {
+    width: calc(50% - 7.5px);
+    height: 35px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgba(230, 230, 230, 0);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--BMCC-Blue);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.facultyConsoleButton:hover {
+    background-color: rgb(205, 225, 245);
+    border-color: rgba(145, 165, 185, 255);
+}
+
+#inactiveFacultyConsoleButton {
+    background-color: rgb(215, 215, 215);
+    cursor: default;
+}
+
+#inactiveFacultyConsoleButton:hover {
+    background-color: rgb(215, 215, 215);
+    border-color: rgba(230, 230, 230, 0);
 }

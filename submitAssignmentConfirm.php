@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <!-- Andy Estevez -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
@@ -16,8 +18,6 @@
     $assignmentID = urldecode($_GET["aID"]);
     $classID = urldecode($_GET["cID"]);
 ?>
-
-<!DOCTYPE html>
 
 <html lang="en">
     <head>
