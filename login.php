@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
 <!-- Log In Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -18,8 +19,9 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        // Verify Whether Email/Password Are Filled Out
+        // Verify Inputs Not Empty
         if (!empty($email) && !empty($password)) {
+            // Construct Appropriate Query
             if ($accountType == "student") {
                 $query = "select * from students where email = '$email' limit 1";
             }
@@ -34,7 +36,7 @@
 
             $result = mysqli_query($conn, $query);
 
-            // If Account Is Found
+            // Verify Query & Results Exist
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
                     
@@ -56,7 +58,7 @@
                     }
                 }
             }
-
+            
             /* Handle Incorrect Input Here */
         }
         else {
@@ -76,15 +78,22 @@
     <body class="loginBody">
         <!-- Header / Navigation Bar -->
         <nav>
+            <!-- Logo -->
             <a href="index.html">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Button -->
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='index.html'">Home</button>
             </div>
         </nav>
 
-        <!-- Log In Section -->
+        <!------------->
+        <!-- Content -->
+        <!------------->
+
+        <!-- Log In Div -->
         <div class="loginDiv">
             <p class="loginHeader">Log In</p>
 

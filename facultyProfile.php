@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
 <!-- Faculty Profile Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -26,9 +27,12 @@
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
+            <!-- Logo -->
             <a href="facultyHome.php">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Buttons -->
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='facultyHome.php'">Home</button>
                 <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
@@ -37,13 +41,18 @@
             </div>
         </nav>
 
+        <!------------->
         <!-- Content -->
+        <!------------->
+
+        <!-- Profile Div -->
         <div class="profileDiv">
             <p class="profileHeader">Profile</p>
 
-            <!-- User Info -->
+            <!-- Profile Body -->
             <div class="profileBody">
-                <?php 
+                <?php
+                    // Display User Info
                     echo("
                         <p class='profileText'><strong>Username</strong>: $user_data[username]</p>
                         <hr>

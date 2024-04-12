@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
 <!-- Assignment Submission Confirmation Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -30,16 +31,19 @@
     <body class="assignmentConfirmBody">
         <!-- Header / Navigation Bar -->
         <nav>
+            <!-- Logo -->
             <a href="studentHome.php">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Button -->
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='studentClass.php?cID=<?php echo($classID) ?>'">Return</button>
             </div>
         </nav>
 
         <?php 
-            // Class Info Banner
+            // Fetch Class & Faculty Info
             $classQuery = "SELECT * 
                             FROM classes AS c
                             LEFT JOIN stutoclassmap as scMap
@@ -49,15 +53,21 @@
                             WHERE $classID = c.classID";
 
             $classResult = mysqli_query($conn, $classQuery);
+            
+            // Verify Query
+            if (!$classResult)
+                die("ERROR: Could not acquire class & faculty data for info banner of class with ID " + $classID);
+        
             $classInfo = mysqli_fetch_assoc($classResult);
 
+            // Display Class Info Banner
             echo("
                 <div class='classInfo'>
                     <p class='classesBlockHeader'><strong>Class</strong>: $classInfo[name] // <strong>Grade</strong>: $classInfo[grade] // <strong>Faculty</strong>: $classInfo[username] // <strong>Email</strong>: $classInfo[email]</p>
                 </div>
             ");
 
-            // Confirmation Form
+            // Display Confirmation Form
             echo("
                 <div class='confDiv'>
                     <p class='confHeader'>Turn In Assignment</p>

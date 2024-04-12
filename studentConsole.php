@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
 <!-- Student Console Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -26,17 +27,25 @@
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
+            <!-- Logo -->
             <a href="studentHome.php">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Buttons -->
             <div class="NavButtonsContainer">
+                <button type="button" class="navButton" onclick="location.href='studentHome.php'">Home</button>
                 <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Console</button>
                 <button type="button" class="navButton" onclick="location.href='studentProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
         </nav>
 
+        <!------------->
         <!-- Content -->
+        <!------------->
+
+        <!-- Class List -->
         <div class="classesBlock">
             <!-- View Header -->
             <div class="classesBlockHead">
@@ -47,6 +56,7 @@
             <input type="text" class="searchBar" placeholder="Search">
             
             <?php
+                // Fetch Student's Classes
                 $classesQuery = "SELECT * 
                                  FROM stutoclassmap AS scMap
                                  LEFT JOIN classes AS c
@@ -54,17 +64,21 @@
                                  LEFT JOIN faculty AS f
                                  ON c.facultyID = f.facultyID 
                                  WHERE $user_data[studentID] = scMap.studentID 
-                                 ORDER BY semester DESC;";
+                                 ORDER BY CAST(SUBSTRING_INDEX(semester, ' ', -1) AS UNSIGNED) DESC;";
 
                 $classesResult = mysqli_query($conn, $classesQuery);
 
+                // Verify Query & Results Exist
                 if ($classesResult && mysqli_num_rows($classesResult) > 0) {
+                    // Scrollbar Style Fix
                     if (mysqli_num_rows($classesResult) > 3)
                         echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
                     else
                         echo("<div class='classesBlockBody'>");
 
+                    // For Each Class
                     while ($assignedClass = mysqli_fetch_assoc($classesResult)) {
+                        // Append Class To List
                         echo("
                             <a href='studentClass.php?cID=$assignedClass[classID]' class='classLink'>
                                 <div class='classBlockItem'>
@@ -79,6 +93,7 @@
                     echo("</div>");
                 }
                 else {
+                    // Display No Classes Message
                     echo("
                         <div class='classesBlockBody'>
                             <p style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)' class='classBlockItemInfo'>You are not assigned to any classes.</p>

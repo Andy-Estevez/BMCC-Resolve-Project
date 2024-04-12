@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
 <!-- Faculty Console (Classes) Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
     
     include("config.php");
     include("functions.php");
     
     $user_data = check_faculty_login($conn);
+
+    // When Add Class Form Is Submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $className = $_POST["className"];
+        $classSection = $_POST["classSection"];
+        $classSemester = $_POST["classSemester"];
+
+        // Verify Inputs Not Empty
+        if (!empty($className) && !empty($classSection) && !empty($classSemester)) {
+            // Create New Class Entry
+            $query = "INSERT INTO Classes (Classes.facultyID, Classes.name, Classes.section, Classes.semester)
+                      VALUES ('$user_data[facultyID]', '$className', '$classSection', '$classSemester')";
+
+            // Verify Query Successful
+            if (mysqli_query($conn, $query)) {
+                header("Location: facultyConsoleClasses.php");
+                die;
+            } else {
+                die("ERROR: Class creation failed.");
+            }
+        }
+        else {
+            // Handle Empty Inputs Here
+        }
+    }
 ?>
 
 <html lang="en">
@@ -26,9 +52,12 @@
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
+            <!-- Logo -->
             <a href="facultyHome.php">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Buttons -->
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='facultyHome.php'">Home</button>
                 <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
@@ -37,10 +66,13 @@
             </div>
         </nav>
 
+        <!------------->
         <!-- Content -->
+        <!------------->
+
         <!-- Student List -->
-        <div class="classesBlock">
-            <!-- View Select Buttons -->
+        <div class="classesBlock" id="leftAligned">
+            <!-- View Selection Buttons -->
             <div class="facultyClassesBlockHead">
                 <button type="button" class="facultyConsoleButton" onclick="location.href='facultyConsoleClasses.php'">My Classes</button>
                 <button type="button" class="facultyConsoleButton" id="inactiveFacultyConsoleButton" disabled>My Students</button>
@@ -50,10 +82,12 @@
             <input type="text" class="searchBar" placeholder="Search">
 
             <?php
+                // Fetch Faculty's Classes
                 $classesQuery = "SELECT classID
                                  FROM classes AS c
                                  WHERE c.facultyID = $user_data[facultyID]";
 
+                // Fetch Num. Of Students In Faculty's Classes
                 $studentsQuery = "SELECT DISTINCT s.*
                                   FROM students AS s
                                   LEFT JOIN stutoclassmap AS scMap
@@ -62,13 +96,17 @@
 
                 $studentsResult = mysqli_query($conn, $studentsQuery);
 
+                // Verify Query & Results Exist
                 if ($studentsResult && mysqli_num_rows($studentsResult) > 0) {
+                    // Scrollbar Style Fix
                     if (mysqli_num_rows($studentsResult) > 3)
                         echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
                     else
                         echo("<div class='classesBlockBody'>");
 
+                    // For Each Student
                     while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
+                        // Fetch Num. Of Faculty's Classes Student Is In
                         $classCountQuery = "SELECT COUNT(*) AS count
                                             FROM stuToClassMap AS scMap
                                             WHERE scMap.studentID = $assignedStudent[studentID]
@@ -76,25 +114,29 @@
 
                         $classCountResult = mysqli_query($conn, $classCountQuery);
 
+                        // Verify Query
                         if (!($classCountResult))
-                            die("Error: Could not acquire class count for student " + $assignedStudent[name]);
-                        else
+                            die("ERROR: Could not acquire class count for student " + $assignedStudent[name]);
+                        else {
                             $classCount = mysqli_fetch_assoc($classCountResult);
 
-                        echo("
-                            <a href='facultyStudentView.php?cID=$assignedStudent[studentID]' class='classLink'>
-                                <div class='classBlockItem'>
-                                    <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
-                                    <h4 class='classBlockItemInfo'>Classes: $classCount[count]</h4>
-                                </div>
-                            </a>
-                            <hr>
-                        ");
+                            // Append Student To List
+                            echo("
+                                <a href='facultyStudentView.php?cID=$assignedStudent[studentID]' class='classLink'>
+                                    <div class='classBlockItem'>
+                                        <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
+                                        <h4 class='classBlockItemInfo'>Classes: $classCount[count]</h4>
+                                    </div>
+                                </a>
+                                <hr>
+                            ");
+                        }
                     }
 
                     echo("</div>");
                 }
                 else {
+                    // Display No Students Message
                     echo("
                         <div class='classesBlockBody'>
                             <p style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)' class='classBlockItemInfo'>No students are assigned to your classes.</p>
@@ -102,6 +144,18 @@
                     ");
                 }
             ?>
+        </div>
+
+        <!-- Add Class Form -->
+        <div class="addClassFormDiv">
+            <p class="loginHeader">Add Class</p>
+
+            <form class="loginForm" method="post">
+                <input type="text" name="className" class="loginFormElement" placeholder="Enter Class Name">
+                <input type="text" name="classSection" class="loginFormElement" placeholder="Enter Class Section">
+                <input type="text" name="classSemester" class="loginFormElement" placeholder="Enter Class Semester">
+                <input type="submit" value="Create Class" class="loginFormButton">
+            </form>
         </div>
 
         <!-- Footer -->

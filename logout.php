@@ -1,10 +1,11 @@
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
 <!-- Log Out Handler Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     // If Student Logged In, Log Out
