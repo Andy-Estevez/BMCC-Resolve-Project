@@ -3,7 +3,7 @@
 <!-- Andy Estevez -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Student Profile Page -->
 
 <?php
@@ -20,17 +20,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades Student Profile</title>
+        <title>BMCC Resolve | Student Profile</title>
     </head>
 
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
-            <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <a href="studentHome.php">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
             <div class="NavButtonsContainer">
-                <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Classes</button>
+                <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Console</button>
                 <button type="button" class="navButton" onclick="location.href='studentProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
