@@ -541,3 +541,90 @@ label {
     background-color: rgb(215, 215, 215);
     border-color: rgba(230, 230, 230, 0);
 }
+
+/*~~~~~~~~~~~~~~~~*/
+/* student home */
+/*~~~~~~~~~~~~~*/
+
+.placeholder {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .inc_info,
+  .study_tips {
+    width: 40%; 
+    border: 1px solid #c8c5c5;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #b2b0b0;
+  }
+  
+  .progress_box {
+    border: 1px solid ;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #b2b0b0;
+  }
+  
+  .classes_container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .classes {
+    margin-right: 10px; 
+  }
+  
+/*~~~~~~~~~~~~~~~~*/
+/* notification form */
+/*~~~~~~~~~~~~~*/
+
+.notification_form {
+    float: right;
+    width: 300px; 
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-right: 20px; 
+    margin-top: 20px; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification_form label {
+    display: block;
+    margin-bottom: auto;
+}
+
+.notification_form input[type="text"],
+.notification_form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.notification_form input[type="submit"] {
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.notification_form input[type="submit"]:hover {
+    background-color:lightblue;
+}
