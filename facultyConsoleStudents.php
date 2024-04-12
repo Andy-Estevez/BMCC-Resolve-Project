@@ -19,13 +19,16 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $className = $_POST["className"];
         $classSection = $_POST["classSection"];
-        $classSemester = $_POST["classSemester"];
+        $classYear = $_POST["classYear"];
 
         // Verify Inputs Not Empty
-        if (!empty($className) && !empty($classSection) && !empty($classSemester)) {
+        if (!empty($className) && !empty($classSection) && isset($_POST["classSemester"]) && !empty($classYear)) {
+            // Get Class Semester
+            $classSemester = $_POST["classSemester"];
+
             // Create New Class Entry
-            $query = "INSERT INTO Classes (Classes.facultyID, Classes.name, Classes.section, Classes.semester)
-                      VALUES ('$user_data[facultyID]', '$className', '$classSection', '$classSemester')";
+            $query = "INSERT INTO Classes (Classes.facultyID, Classes.name, Classes.section, Classes.semester, Classes.year)
+                      VALUES ('$user_data[facultyID]', '$className', '$classSection', '$classSemester', '$classYear')";
 
             // Verify Query Successful
             if (mysqli_query($conn, $query)) {
@@ -79,7 +82,7 @@
             </div>
 
             <!-- Search Bar -->
-            <input type="text" class="searchBar" placeholder="Search">
+            <input type="text" class="searchBar" id="searchBar" placeholder="Search">
 
             <?php
                 // Fetch Faculty's Classes
@@ -138,8 +141,8 @@
                 else {
                     // Display No Students Message
                     echo("
-                        <div class='classesBlockBody'>
-                            <p style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)' class='classBlockItemInfo'>No students are assigned to your classes.</p>
+                        <div class='classesBlockBody' style='display: flex; align-items: center; justify-content: center;'>
+                            <p class='classBlockItemInfo'>No students are assigned to your classes.</p>
                         </div>
                     ");
                 }
@@ -153,7 +156,22 @@
             <form class="loginForm" method="post">
                 <input type="text" name="className" class="loginFormElement" placeholder="Enter Class Name">
                 <input type="text" name="classSection" class="loginFormElement" placeholder="Enter Class Section">
-                <input type="text" name="classSemester" class="loginFormElement" placeholder="Enter Class Semester">
+
+                <!-- Class Date -->
+                <div class="classDateHolder">
+                    <!-- Semester Dropdown Menu -->
+                    <select name="classSemester" class="loginFormElement classDateElement" id="classSemester">
+                        <option selected disabled value="">Pick Semester</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Fall">Fall</option>
+                        <option value="Winter">Winter</option>
+                    </select>
+                    
+                    <!-- Year Of Class -->
+                    <input type="text" name="classYear" class="loginFormElement classDateElement" id="classYear" placeholder="Enter Year">
+                </div>
+
                 <input type="submit" value="Create Class" class="loginFormButton">
             </form>
         </div>

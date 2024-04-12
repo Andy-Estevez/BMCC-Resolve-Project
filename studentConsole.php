@@ -53,7 +53,7 @@
             </div>
 
             <!-- Search Bar -->
-            <input type="text" class="searchBar" placeholder="Search">
+            <input type="text" class="searchBar" id="searchBar" placeholder="Search">
             
             <?php
                 // Fetch Student's Classes
@@ -95,8 +95,8 @@
                 else {
                     // Display No Classes Message
                     echo("
-                        <div class='classesBlockBody'>
-                            <p style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)' class='classBlockItemInfo'>You are not assigned to any classes.</p>
+                        <div class='classesBlockBody' style='display: flex; align-items: center; justify-content: center;'>
+                            <p class='classBlockItemInfo'>You are not assigned to any classes.</p>
                         </div>
                     ");
                 }
