@@ -3,7 +3,7 @@
 <!-- Andy Estevez -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Faculty Console (Classes) Page -->
 
 <?php
@@ -20,16 +20,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades Faculty Console</title>
+        <title>BMCC Resolve | Faculty Console</title>
     </head>
 
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
-            <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <a href="facultyHome.php">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
             <div class="NavButtonsContainer">
+                <button type="button" class="navButton" onclick="location.href='facultyHome.php'">Home</button>
                 <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
                 <button type="button" class="navButton" onclick="location.href='facultyProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
@@ -37,11 +38,16 @@
         </nav>
 
         <!-- Content -->
+        <!-- Student List -->
         <div class="classesBlock">
+            <!-- View Select Buttons -->
             <div class="facultyClassesBlockHead">
                 <button type="button" class="facultyConsoleButton" onclick="location.href='facultyConsoleClasses.php'">My Classes</button>
                 <button type="button" class="facultyConsoleButton" id="inactiveFacultyConsoleButton" disabled>My Students</button>
             </div>
+
+            <!-- Search Bar -->
+            <input type="text" class="searchBar" placeholder="Search">
 
             <?php
                 $classesQuery = "SELECT classID
@@ -53,11 +59,6 @@
                                   LEFT JOIN stutoclassmap AS scMap
                                   ON scMap.studentID = s.studentID
                                   WHERE scMap.classID IN ($classesQuery);";
-
-                // $studentsQuery = "SELECT DISTINCT s.*
-                //                     FROM students AS s, stutoclassmap AS scMap
-                //                     WHERE scMap.classID IN ($classesQuery)
-                //                     AND s.studentID = scMap.studentID;";
 
                 $studentsResult = mysqli_query($conn, $studentsQuery);
 

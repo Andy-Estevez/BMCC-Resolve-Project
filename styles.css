@@ -2,7 +2,7 @@
     Andy Estevez
     BMCC Tech Innovation Hub Internship
     Spring Semester 2024
-    BMCC INC Grade Project
+    BMCC Resolve Project
     CSS Stylesheet
 */
 
@@ -17,15 +17,14 @@
 
 body {
     margin: 0;
-    /*margin-top: 75px;*/
-}
-
-button {
-    cursor: pointer;
 }
 
 a {
     color: var(--BMCC-Blue);
+}
+
+button {
+    cursor: pointer;
 }
 
 h3 {
@@ -52,21 +51,17 @@ nav {
 
 .NavButtonsContainer {
     height: 50px;
-    width: 350px;
+    width: fit-content;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     margin-right: 125px;
     margin-top: 12.5px;
 }
 
-.NavButtonsContainer#console {
-    justify-content: right;
-}
-
 .navButton {
     height: 35px;
-    width: 30%;
-    margin-top: 7.5px;
+    width: 90px;
+    margin: 7.5px 0 0 10px;
     background-color: rgb(255, 255, 255);
     border-color: rgba(230, 230, 230, 0);
     border-style: solid;
@@ -208,7 +203,8 @@ footer.abs {
 /* Log In / Sign Up Pages */
 /* ~~~~~~~~~~~~~~~~~~~~~~ */
 
-.loginBody, .assignmentConfirmBody {
+.loginBody,
+.assignmentConfirmBody {
     background-image: url('Elements/BMCC-logo-no-type-gray.png');
     background-size: 100px;
     animation: animate-loginBody-bg 5s infinite linear;
@@ -228,7 +224,9 @@ footer.abs {
     border-radius: 15px;
 }
 
-.loginHeader, .profileHeader, .confHeader {
+.loginHeader,
+.profileHeader,
+.confHeader {
     color: white;
     font-size: 30px;
     text-align: center;
@@ -308,6 +306,12 @@ label {
     background: linear-gradient(var(--BMCC-Blue), #004894);
 }
 
+.classesBlock#leftAligned {
+    width: calc(100vw - 765px);
+    margin: 75px 125px;
+    float: left;
+}
+
 .classesBlockHeader {
     color: white;
     text-align: center;
@@ -342,9 +346,26 @@ label {
 }
 
 .classBlockItemInfo {
+    margin: 16px 0 16px 0;
     color: white;
     font-weight: normal;
     text-align: center;
+}
+
+.searchBar {
+    height: 30px;
+    padding: 0 16px 0 16px;
+    margin: 0 16px 16px 16px;
+    border: 3px solid white;
+    border-radius: 25px;
+    background-color: #003884;
+    color: white;
+    text-align: center;
+    font-size: 17px;
+}
+
+.searchBar::placeholder {
+    color: rgb(170, 170, 170);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~ */
@@ -373,7 +394,8 @@ label {
     background-color: #003884;
 }
 
-.profileText, .confText {
+.profileText,
+.confText {
     color: white;
     margin-left: 15px;
 }
@@ -517,7 +539,7 @@ label {
     width: calc(50% - 7.5px);
     height: 35px;
     background-color: rgb(255, 255, 255);
-    border-color: rgba(230, 230, 230, 0);
+    border-color: rgba(255, 255, 255, 0);
     border-style: solid;
     border-width: 3px;
     border-radius: 25px;
@@ -528,16 +550,28 @@ label {
 }
 
 .facultyConsoleButton:hover {
-    background-color: rgb(205, 225, 245);
-    border-color: rgba(145, 165, 185, 255);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(125, 150, 175, 1);
 }
 
 #inactiveFacultyConsoleButton {
-    background-color: rgb(215, 215, 215);
+    background-color: rgba(255, 255, 255, 0.75);
     cursor: default;
 }
 
 #inactiveFacultyConsoleButton:hover {
-    background-color: rgb(215, 215, 215);
-    border-color: rgba(230, 230, 230, 0);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.addClassFormDiv {
+    width: 390px;
+    height: calc(100vh - 325px);
+    margin: 75px 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background: linear-gradient(var(--BMCC-Blue), #004894);
 }
