@@ -54,34 +54,92 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
             </a>
             <div class="NavButtonsContainer">
-                <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
-                <button type="button" class="navButton" onclick="location.href='facultyProfile.php'">Profile</button>
+                <button type="button" class="navButton" onclick="location.href='adminHome.php'">Home</button>
+                <button type="button" class="navButton" onclick="location.href='adminConsoleClasses.php'">Console</button>
+                <button type="button" class="navButton" onclick="location.href='adminProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
         </nav>
-          <div class="notification_form">
-            <form method="post">
-                <label for="notificationID">Notification ID:</label><br>
-                <input type="text" id="notificationID" name="notificationID"><br>
-                
-                <label for="facultyID">Faculty ID:</label><br>
-                <input type="text" id="facultyID" name="facultyID" placeholder="Enter faculty ID"><br>
-                
-                <label for="studentID">Student ID:</label><br>
-                <input type="text" id="studentID" name="studentID"><br>
-                
-                <label for="classID">Class ID:</label><br>
-                <input type="text" id="classID" name="classID"><br>
-                
-                <label for="Message">Message:</label><br>
-                <textarea id="Message" name="Message" rows="4" cols="50"></textarea><br>
-                
-                <label for="Status">Status:</label><br>
-                <input type="text" id="Status" name="Status"><br>
-                
-                <input type="submit" value="Send Announcement">
+            <!-- block -->
+            <div class="classesBlock" id="leftAligned">
+            <!-- View Select Buttons -->
+            <div class="facultyClassesBlockHead">
+                 <button type="button" class="adminConsoleButton" onclick="location.href='facultyConsoleClasses.php'">Classes</button>
+                 <button type="button" class="adminConsoleButton" onclick="location.href=''" >Professors</button>
+                 <button type="button" class="adminConsoleButton" id="inactiveFacultyConsoleButton" disabled>Students</button>
+            </div>
+            <!-- Search Bar -->
+            <input type="text" class="searchBar" placeholder="Search">
+
+            <?php
+                $classesQuery = "SELECT classID
+                                 FROM classes AS c
+                                 WHERE c.facultyID = $user_data[facultyID]";
+
+                $studentsQuery = "SELECT DISTINCT s.*
+                                  FROM students AS s
+                                  LEFT JOIN stutoclassmap AS scMap
+                                  ON scMap.studentID = s.studentID
+                                  WHERE scMap.classID IN ($classesQuery);";
+
+                $studentsResult = mysqli_query($conn, $studentsQuery);
+
+                if ($studentsResult && mysqli_num_rows($studentsResult) > 0) {
+                    if (mysqli_num_rows($studentsResult) > 3)
+                        echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
+                    else
+                        echo("<div class='classesBlockBody'>");
+
+                    while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
+                        $classCountQuery = "SELECT COUNT(*) AS count
+                                            FROM stuToClassMap AS scMap
+                                            WHERE scMap.studentID = $assignedStudent[studentID]
+                                            AND scMap.classID IN ($classesQuery);";
+
+                        $classCountResult = mysqli_query($conn, $classCountQuery);
+
+                        if (!($classCountResult))
+                            die("Error: Could not acquire class count for student " + $assignedStudent[name]);
+                        else
+                            $classCount = mysqli_fetch_assoc($classCountResult);
+
+                        echo("
+                            <a href='facultyStudentView.php?cID=$assignedStudent[studentID]' class='classLink'>
+                                <div class='classBlockItem'>
+                                    <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
+                                    <h4 class='classBlockItemInfo'>Classes: $classCount[count]</h4>
+                                </div>
+                            </a>
+                            <hr>
+                        ");
+                    }
+
+                    echo("</div>");
+                }
+                else {
+                    echo("
+                        <div class='classesBlockBody'>
+                            <p style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)' class='classBlockItemInfo'>No students are assigned to your classes.</p>
+                        </div>
+                    ");
+                }
+            ?>
+        </div>
+
+        <div class="addClassFormDiv">
+        <p class="loginHeader">Send Notification</p>
+
+            <form class="loginForm" method="post">
+                <input type="text" name="Title" class="loginFormElement" placeholder="Enter Title"><br>
+
+                <input type="text" name="Message" class="loginFormElement" placeholder="Message" ><br>
+
+                <input type="submit" value="Send" class="loginFormButton">
+
             </form>
             </div>
+
+
 
          <!-- Footer -->
          <footer>

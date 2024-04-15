@@ -554,6 +554,25 @@ label {
     border-color: rgba(125, 150, 175, 1);
 }
 
+.adminConsoleButton{
+    width: calc(33.3% - 7.5px);
+    height: 35px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgba(255, 255, 255, 0);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--BMCC-Blue);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.adminConsoleButton:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(125, 150, 175, 1);
+}
+
 #inactiveFacultyConsoleButton {
     background-color: rgba(255, 255, 255, 0.75);
     cursor: default;
@@ -620,45 +639,3 @@ label {
     margin-right: 10px; 
   }
   
-/*~~~~~~~~~~~~~~~~*/
-/* notification form */
-/*~~~~~~~~~~~~~*/
-
-.notification_form {
-    float: right;
-    width: 300px; 
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-right: 20px; 
-    margin-top: 20px; 
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.notification_form label {
-    display: block;
-    margin-bottom: auto;
-}
-
-.notification_form input[type="text"],
-.notification_form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
-.notification_form input[type="submit"] {
-    background-color: blue;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.notification_form input[type="submit"]:hover {
-    background-color:lightblue;
-}
