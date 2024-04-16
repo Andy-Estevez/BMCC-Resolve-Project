@@ -42,15 +42,19 @@
             </div>
         </nav>
 
+        <!------------->
+        <!-- Content -->
+        <!------------->
+
         <?php
             // Fetch Class & Faculty Info
             $classQuery = "SELECT * 
-                            FROM classes AS c
-                            LEFT JOIN stutoclassmap as scMap
-                            ON $user_data[studentID] = scMap.studentID
-                            LEFT JOIN faculty AS f
-                            ON c.facultyID = f.facultyID
-                            WHERE $classID = c.classID";
+                           FROM classes AS c
+                           LEFT JOIN stutoclassmap as scMap
+                           ON $user_data[studentID] = scMap.studentID
+                           LEFT JOIN faculty AS f
+                           ON c.facultyID = f.facultyID
+                           WHERE $classID = c.classID";
 
             $classResult = mysqli_query($conn, $classQuery);
 
@@ -63,7 +67,12 @@
             // Display Class Info Banner
             echo("
                 <div class='classInfo'>
-                    <p class='classesBlockHeader'><strong>Class</strong>: $classInfo[name] // <strong>Grade</strong>: $classInfo[grade] // <strong>Faculty</strong>: $classInfo[username] // <strong>Email</strong>: $classInfo[email]</p>
+                    <p class='classesBlockHeader'>
+                        <strong>Class</strong>: $classInfo[name] // 
+                        <strong>Grade</strong>: $classInfo[grade] // 
+                        <strong>Faculty</strong>: $classInfo[username] // 
+                        <strong>Email</strong>: $classInfo[email]
+                    </p>
                 </div>
             ");
 

@@ -407,9 +407,14 @@ label {
 .classInfo {
     width: 100vw;
     max-width: 100%;
+    height: 50px;
     overflow: hidden;
-    border-top: 2px solid rgb(200, 200, 200);
-    border-bottom: 2px solid rgb(200, 200, 200);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
     background-color: #003884;
 }
 
@@ -441,7 +446,7 @@ label {
 
 .assignmentButton {
     height: 35px;
-    width: 15%;
+    width: 175px;
     margin: 20px;
     background-color: rgb(255, 255, 255);
     border-color: rgba(230, 230, 230, 0);
@@ -593,4 +598,75 @@ label {
 
 #classSemester {
     color: rgb(125, 125, 125);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Faculty Class Viewer Page */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.assignmentCornerButton {
+    height: 35px;
+    width: 35px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 17.5px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.assignmentCornerButton.classSettings {
+    margin: 0 142.5px;
+    background: url(Elements/SettingsIcon.png);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.assignmentCornerButton.classAnnouncements {
+    margin: 0 142.5px;
+    background: url(Elements/MegaphoneIcon.png);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.createAssignmentButton {
+    height: 35px;
+    width: 175px;
+    display: block;
+    margin: 25px auto;
+    background-color: var(--BMCC-Blue);
+    border: 2px solid rgba(230, 230, 230, 0);
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.createAssignmentButton:hover {
+    background-color: #004894;
+    border-color: rgba(145, 165, 185, 255);
+}
+
+.assignmentBlockHead {
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignmentCornerButton.assignmentSettings {
+    margin: 0 25px;
+    background: url(Elements/SettingsIcon.png);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.assignmentCornerButton.assignmentNotifications {
+    margin: 0 25px;
+    background: url(Elements/BellIcon.png);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
 }

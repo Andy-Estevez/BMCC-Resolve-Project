@@ -91,8 +91,6 @@
                                  WHERE $user_data[facultyID] = c.facultyID
                                  ORDER BY c.year DESC, c.semester ASC";
 
-                // ^ SORTING COULD USE IMPROVEMENT
-
                 $classesResult = mysqli_query($conn, $classesQuery);
 
                 // Verify Query & Results Exist
