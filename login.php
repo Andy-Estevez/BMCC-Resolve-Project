@@ -21,20 +21,26 @@
 
         // Verify Inputs Not Empty
         if (!empty($email) && !empty($password)) {
-            // Construct Appropriate Query
-            if ($accountType == "student") {
+            // Check For Admin Log In
+            $query = "select * from admins where email = '$email' limit 1";
+            $result = mysqli_query($conn, $query);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                $accountType = "admin";
+            }
+            else if ($accountType == "student") {
+                // If Not Admin, Check For Student
                 $query = "select * from students where email = '$email' limit 1";
+                $result = mysqli_query($conn, $query);
             }
             else if ($accountType == "faculty") {
+                // If Not Admin, Check For Faculty
                 $query = "select * from faculty where email = '$email' limit 1";
+                $result = mysqli_query($conn, $query);
             }
             else {
                 die("ERROR: Invalid account type during account log in.");
             }
-
-            // THIS COULD USE SOME POTENTIAL IMPROVEMENTS ^
-
-            $result = mysqli_query($conn, $query);
 
             // Verify Query & Results Exist
             if ($result && mysqli_num_rows($result) > 0) {
@@ -51,6 +57,11 @@
                     else if ($accountType == "faculty") {
                         $_SESSION["facultyID"] = $user_data["facultyID"];
                         header("Location: facultyConsoleClasses.php");
+                        die;
+                    }
+                    else if ($accountType == "admin") {
+                        $_SESSION["adminID"] = $user_data["adminID"];
+                        header("Location: adminConsoleClasses.php");
                         die;
                     }
                     else {

@@ -4,7 +4,7 @@
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
-<!-- Faculty Console (Classes) Page -->
+<!-- Faculty Console (Students) Page -->
 
 <?php
     // PHP / Data Set Up
