@@ -418,6 +418,10 @@ label {
     background-color: #003884;
 }
 
+.classInfo.student {
+    justify-content: center;
+}
+
 .assignmentBlock {
     width: calc(100vw - 250px);
     height: fit-content;
