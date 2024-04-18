@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Faculty Console (Classes) Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
     
     include("config.php");
     include("functions.php");
     
     $user_data = check_faculty_login($conn);
+
+    // When Add Class Form Is Submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $className = $_POST["className"];
+        $classSection = $_POST["classSection"];
+        $classYear = $_POST["classYear"];
+
+        // Verify Inputs Not Empty
+        if (!empty($className) && !empty($classSection) && isset($_POST["classSemester"]) && !empty($classYear)) {
+            // Get Class Semester
+            $classSemester = $_POST["classSemester"];
+
+            // Create New Class Entry
+            $query = "INSERT INTO Classes (Classes.facultyID, Classes.name, Classes.section, Classes.semester, Classes.year)
+                      VALUES ('$user_data[facultyID]', '$className', '$classSection', '$classSemester', '$classYear')";
+
+            // Verify Query Successful
+            if (mysqli_query($conn, $query)) {
+                header("Location: facultyConsoleClasses.php");
+                die;
+            } else {
+                die("ERROR: Class creation failed.");
+            }
+        }
+        else {
+            // Handle Empty Inputs Here
+        }
+    }
 ?>
 
 <html lang="en">
@@ -20,76 +49,124 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades Faculty Console</title>
+        <title>BMCC Resolve | Faculty Console</title>
     </head>
 
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
-            <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <!-- Logo -->
+            <a href="facultyHome.php">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Buttons -->
             <div class="NavButtonsContainer">
+                <button type="button" class="navButton" onclick="location.href='facultyHome.php'">Home</button>
                 <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
                 <button type="button" class="navButton" onclick="location.href='facultyProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
         </nav>
 
+        <!------------->
         <!-- Content -->
-        <div class="classesBlock">
+        <!------------->
+
+        <!-- Class List -->
+        <div class="classesBlock" id="leftAligned">
+            <!-- View Selection Buttons -->
             <div class="facultyClassesBlockHead">
                 <button type="button" class="facultyConsoleButton" id="inactiveFacultyConsoleButton" disabled>My Classes</button>
                 <button type="button" class="facultyConsoleButton" onclick="location.href='facultyConsoleStudents.php'">My Students</button>
             </div>
 
+            <!-- Search Bar -->
+            <input type="text" class="searchBar" id="searchBar" placeholder="Search">
+
             <?php
+                // Fetch Faculty's Classes
                 $classesQuery = "SELECT *
                                  FROM classes AS c
                                  WHERE $user_data[facultyID] = c.facultyID
-                                 ORDER BY semester DESC;";
+                                 ORDER BY c.year DESC, c.semester ASC";
 
                 $classesResult = mysqli_query($conn, $classesQuery);
 
+                // Verify Query & Results Exist
                 if ($classesResult && mysqli_num_rows($classesResult) > 0) {
+                    // Scrollbar Style Fix
                     if (mysqli_num_rows($classesResult) > 3)
                         echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
                     else
                         echo("<div class='classesBlockBody'>");
 
+                    // For Each Class
                     while ($assignedClass = mysqli_fetch_assoc($classesResult)) {
+                        // Fetch Class' Student Count
                         $studentCountQuery = "SELECT COUNT(*) AS count
                                             FROM stuToClassMap AS scMap
                                             WHERE scMap.classID = $assignedClass[classID]";
 
                         $studentCountResult = mysqli_query($conn, $studentCountQuery);
 
+                        // Verify Query
                         if (!($studentCountResult))
-                            die("Error: Could not acquire student count for class " + $assignedClass[name]);
-                        else
+                            die("ERROR: Could not acquire student count for class " + $assignedClass[name]);
+                        else {
                             $studentCount = mysqli_fetch_assoc($studentCountResult);
 
-                        echo("
-                            <a href='facultyClass.php?cID=$assignedClass[classID]' class='classLink'>
-                                <div class='classBlockItem'>
-                                    <h4 class='classBlockItemInfo'><strong>$assignedClass[name]</strong> ~ <strong>$user_data[username]</strong> ($assignedClass[semester], $assignedClass[section])</h4>
-                                    <h4 class='classBlockItemInfo'>Students: $studentCount[count]</h4>
-                                </div>
-                            </a>
-                            <hr>
-                        ");
+                            // Append Class To List
+                            echo("
+                                <a href='facultyClass.php?cID=$assignedClass[classID]' class='classLink'>
+                                    <div class='classBlockItem'>
+                                        <h4 class='classBlockItemInfo'><strong>$assignedClass[name]</strong> ~ <strong>$user_data[username]</strong> ($assignedClass[semester] $assignedClass[year], $assignedClass[section])</h4>
+                                        <h4 class='classBlockItemInfo'>Students: $studentCount[count]</h4>
+                                    </div>
+                                </a>
+                                <hr>
+                            ");
+                        }
                     }
 
                     echo("</div>");
                 }
                 else {
+                    // Display No Classes Massage
                     echo("
-                        <div class='classesBlockBody'>
-                            <p style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)' class='classBlockItemInfo'>You have not created any classes.</p>
+                        <div class='classesBlockBody' style='display: flex; align-items: center; justify-content: center;'>
+                            <p class='classBlockItemInfo'>You have not created any classes.</p>
                         </div>
                     ");
                 }
             ?>
+        </div>
+
+        <!-- Add Class Form -->
+        <div class="addClassFormDiv">
+            <p class="loginHeader">Add Class</p>
+
+            <form class="loginForm" method="post">
+                <input type="text" name="className" class="loginFormElement" placeholder="Enter Class Name">
+                <input type="text" name="classSection" class="loginFormElement" placeholder="Enter Class Section">
+
+                <!-- Class Date -->
+                <div class="classDateHolder">
+                    <!-- Semester Dropdown Menu -->
+                    <select name="classSemester" class="loginFormElement classDateElement" id="classSemester">
+                        <option selected disabled value="">Pick Semester</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Fall">Fall</option>
+                        <option value="Winter">Winter</option>
+                    </select>
+                    
+                    <!-- Year Of Class -->
+                    <input type="text" name="classYear" class="loginFormElement classDateElement" id="classYear" placeholder="Enter Year">
+                </div>
+
+                <input type="submit" value="Create Class" class="loginFormButton">
+            </form>
         </div>
 
         <!-- Footer -->

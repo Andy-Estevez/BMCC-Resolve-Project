@@ -1,10 +1,11 @@
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Assignment Submission Handler -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -14,9 +15,10 @@
     $assignmentID = $_GET["aID"];
     $classID = $_GET["cID"];
 
+    // Update Assignment Status
     $updateQuery = "UPDATE stutoassignmentmap SET completionStatus = 1 WHERE assignmentID = $assignmentID";
 
-    // Update Assignment Data & Verify Update
+    // Verify Query Successful
     if (mysqli_query($conn, $updateQuery)) {
         header("Location: studentClass.php?cID=$classID");
     } else {

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Faculty Profile Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -20,29 +21,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades faculty Profile</title>
+        <title>BMCC Resolve | Faculty Profile</title>
     </head>
 
     <body>
         <!-- Header / Navigation Bar -->
         <nav>
-            <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <!-- Logo -->
+            <a href="facultyHome.php">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Buttons -->
             <div class="NavButtonsContainer">
-                <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Classes</button>
+                <button type="button" class="navButton" onclick="location.href='facultyHome.php'">Home</button>
+                <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
                 <button type="button" class="navButton" onclick="location.href='facultyProfile.php'">Profile</button>
                 <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
             </div>
         </nav>
 
+        <!------------->
         <!-- Content -->
+        <!------------->
+
+        <!-- Profile Div -->
         <div class="profileDiv">
             <p class="profileHeader">Profile</p>
 
-            <!-- User Info -->
+            <!-- Profile Body -->
             <div class="profileBody">
-                <?php 
+                <?php
+                    // Display User Info
                     echo("
                         <p class='profileText'><strong>Username</strong>: $user_data[username]</p>
                         <hr>

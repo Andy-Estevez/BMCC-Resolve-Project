@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Sign Up Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -19,7 +20,7 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        // Verify Whether Username/Email/Password Are Filled Out
+        // Verify Inputs Not Empty
         if (!empty($username) && !empty($email) && !empty($password)) {
             // Generate User ID
             $user_id = random_num(10);
@@ -35,7 +36,7 @@
                 die("ERROR: Invalid account type during account registration.");
             }
 
-            // Insert Account Data & Verify Insertion
+            // Verify Query Successful
             if (mysqli_query($conn, $query)) {
                 header("Location: login.php");
                 die;
@@ -45,7 +46,7 @@
             }
         }
         else {
-            echo("The input information is invalid.");
+            // Handle Empty Inputs Here
         }
     }
 ?>
@@ -55,21 +56,28 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades Sign Up Page</title>
+        <title>BMCC Resolve | Sign Up</title>
     </head>
 
     <body class="loginBody">
         <!-- Header / Navigation Bar-->
         <nav>
-            <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <!-- Logo -->
+            <a href="index.html">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
-            <div class="NavButtonsContainer" id="console">
+
+            <!-- Button -->
+            <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='index.html'">Home</button>
             </div>
         </nav>
 
-        <!-- Sign Up Section -->
+        <!------------->
+        <!-- Content -->
+        <!------------->
+
+        <!-- Sign Up Div -->
         <div class="loginDiv">
             <p class="loginHeader">Sign Up</p>
 

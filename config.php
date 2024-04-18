@@ -1,7 +1,7 @@
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- PHP Configs Holder -->
 
 <?php
@@ -15,7 +15,6 @@
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     
     // Verify Connection
-    if ($conn === false) {
+    if ($conn === false)
         die("ERROR: Could not connect. " . mysqli_connect_error());
-    }
 ?>

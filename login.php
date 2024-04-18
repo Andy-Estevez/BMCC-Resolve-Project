@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
-<!-- Andy Estevez -->
+<!-- Andy Estevez / Smedly Moise -->
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
-<!-- BMCC INC Grade Project -->
+<!-- BMCC Resolve Project -->
 <!-- Log In Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -18,23 +19,30 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        // Verify Whether Email/Password Are Filled Out
+        // Verify Inputs Not Empty
         if (!empty($email) && !empty($password)) {
-            if ($accountType == "student") {
+            // Check For Admin Log In
+            $query = "select * from admins where email = '$email' limit 1";
+            $result = mysqli_query($conn, $query);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                $accountType = "admin";
+            }
+            else if ($accountType == "student") {
+                // If Not Admin, Check For Student
                 $query = "select * from students where email = '$email' limit 1";
+                $result = mysqli_query($conn, $query);
             }
             else if ($accountType == "faculty") {
+                // If Not Admin, Check For Faculty
                 $query = "select * from faculty where email = '$email' limit 1";
+                $result = mysqli_query($conn, $query);
             }
             else {
                 die("ERROR: Invalid account type during account log in.");
             }
 
-            // THIS COULD USE SOME POTENTIAL IMPROVEMENTS ^
-
-            $result = mysqli_query($conn, $query);
-
-            // If Account Is Found
+            // Verify Query & Results Exist
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
                     
@@ -51,12 +59,17 @@
                         header("Location: facultyConsoleClasses.php");
                         die;
                     }
+                    else if ($accountType == "admin") {
+                        $_SESSION["adminID"] = $user_data["adminID"];
+                        header("Location: adminConsoleClasses.php");
+                        die;
+                    }
                     else {
                         die("ERROR: Invalid account type during account log in.");
                     }
                 }
             }
-
+            
             /* Handle Incorrect Input Here */
         }
         else {
@@ -70,21 +83,28 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Grades Log In Page</title>
+        <title>BMCC Resolve | Log In</title>
     </head>
 
     <body class="loginBody">
         <!-- Header / Navigation Bar -->
         <nav>
-            <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <!-- Logo -->
+            <a href="index.html">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
-            <div class="NavButtonsContainer" id="console">
+
+            <!-- Button -->
+            <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='index.html'">Home</button>
             </div>
         </nav>
 
-        <!-- Log In Section -->
+        <!------------->
+        <!-- Content -->
+        <!------------->
+
+        <!-- Log In Div -->
         <div class="loginDiv">
             <p class="loginHeader">Log In</p>
 
