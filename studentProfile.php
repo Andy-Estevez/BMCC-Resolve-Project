@@ -24,7 +24,7 @@
         <title>BMCC Resolve | Student Profile</title>
     </head>
 
-    <body>
+    <body class="loginBody">
         <!-- Header / Navigation Bar -->
         <nav>
             <!-- Logo -->

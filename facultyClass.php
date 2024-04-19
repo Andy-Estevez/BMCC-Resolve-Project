@@ -76,7 +76,7 @@
             // Display Class Info Banner
             echo("
                 <div class='classInfo'>
-                    <button class='assignmentCornerButton classSettings' onclick='location.href=\"editClass.php?cID=$classID\"'></button>
+                    <button class='assignmentCornerButton classAnnouncements' onclick='location.href=\"sendClassAnnouncement.php?cID=$classID\"'></button>
                     <p class='classesBlockHeader'>
                         <strong>Class</strong>: $classInfo[name] // 
                         <strong>Section</strong>: $classInfo[section] // 
@@ -84,7 +84,7 @@
                         <strong>Year</strong>: $classInfo[year] // 
                         <strong>Students</strong>: $studentCount[count]
                     </p>
-                    <button class='assignmentCornerButton classAnnouncements' onclick='location.href=\"sendClassAnnouncement.php?cID=$classID\"'></button>
+                    <button class='assignmentCornerButton classSettings' onclick='location.href=\"facultyEditClass.php?cID=$classID\"'></button>
                 </div>
             ");
 
@@ -109,9 +109,9 @@
                     echo("
                         <div class='assignmentBlock'>
                             <div class='assignmentBlockHead'>
-                                <button class='assignmentCornerButton assignmentSettings' onclick='location.href=\"editAssigment.php?aID=$assignment[assignmentID]\"'></button>
-                                <h2 class='classBlockItemInfo'>$assignment[title]</h2>
                                 <button class='assignmentCornerButton assignmentNotifications' onclick='location.href=\"sendAssignmentReminder.php?aID=$assignment[assignmentID]\"'></button>
+                                <h2 class='classBlockItemInfo'>$assignment[title]</h2>
+                                <button class='assignmentCornerButton assignmentSettings' onclick='location.href=\"facultyEditAssigment.php?aID=$assignment[assignmentID]\"'></button>
                             </div>
                             
                             <div class='assignmentBlockBody'>
