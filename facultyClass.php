@@ -88,9 +88,6 @@
                 </div>
             ");
 
-            // Student List
-            // echo("<div style='height: 75px; width: 100%; background-color: #002874;'></div>");
-
             echo("<button class='createAssignmentButton' onclick='location.href=\"createAssignment.php?cID=$classID\"'>Create Assignment</button>");
 
             // Fetch Assignments
@@ -126,7 +123,7 @@
                                                     FROM stuToAssignmentMap AS saMap
                                                     WHERE saMap.assignmentID = $assignment[assignmentID]";
 
-                    $assignmentStudentCountResult = mysqli_query($conn, $studentCountQuery);
+                    $assignmentStudentCountResult = mysqli_query($conn, $assignmentStudentCountQuery);
 
                     // Verify Query
                     if (!$assignmentStudentCountResult)

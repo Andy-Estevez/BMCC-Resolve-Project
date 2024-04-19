@@ -105,8 +105,8 @@
                     while ($assignedClass = mysqli_fetch_assoc($classesResult)) {
                         // Fetch Class' Student Count
                         $studentCountQuery = "SELECT COUNT(*) AS count
-                                            FROM stuToClassMap AS scMap
-                                            WHERE scMap.classID = $assignedClass[classID]";
+                                              FROM stuToClassMap AS scMap
+                                              WHERE scMap.classID = $assignedClass[classID]";
 
                         $studentCountResult = mysqli_query($conn, $studentCountQuery);
 

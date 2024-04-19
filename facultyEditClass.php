@@ -15,7 +15,6 @@
 
     $user_data = check_faculty_login($conn);
     $classID = $_GET["cID"];
-    $classSemester;
 
     // When A Form Is Submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -43,7 +42,7 @@
                     header("Location: facultyEditClass.php?cID=$classID");
                     die;
                 } else {
-                    die("ERROR: Class creation failed.");
+                    die("ERROR: Class edition failed.");
                 }
             }
             else {
@@ -52,7 +51,54 @@
         }
         // When Add Student Form Is Submitted
         else if (isset($_POST["formType"]) && $_POST["formType"] == "addStudent") {
+            $studentEmail = $_POST["studentEmail"];
 
+            // Verify Inputs Not Empty
+            if (!empty($studentEmail)) {
+                // Fetch StudentID
+                $studentIDQuery = "SELECT studentID AS studentID
+                                   FROM students AS s
+                                   WHERE s.email = '$studentEmail';";
+
+                $studentIDResult = mysqli_query($conn, $studentIDQuery);
+
+                // If StudentID Found
+                if ($studentIDResult && mysqli_num_rows($studentIDResult) > 0) {
+                    $studentID = mysqli_fetch_assoc($studentIDResult);
+
+                    // Check For Duplicates Within StuToClassMap
+                    $query = "SELECT *
+                              FROM stutoclassmap AS scMap
+                              WHERE scMap.studentID = $studentID[studentID];";
+
+                    $result = mysqli_query($conn, $query);
+
+                    // If No Duplicates
+                    if ($result && mysqli_num_rows($result) < 1) {
+                        // Add Student Entry
+                        $query = "INSERT INTO stutoclassmap (stutoclassmap.studentID, stutoclassmap.classID, stutoclassmap.grade)
+                                  VALUES ('$studentID[studentID]', '$classID', 'INC');";
+
+                        // Verify Query Successful
+                        if (mysqli_query($conn, $query)) {
+                            header("Location: facultyEditClass.php?cID=$classID");
+                            die;
+                        }
+                        else {
+                            die("ERROR: Student addition failed.");
+                        }
+                    }
+                    else {
+                        // Handle Duplicate Attempts Here
+                    }
+                }
+                else {
+                    // Handle Invalid Email Here
+                }
+            }
+            else {
+                // Handle Empty Inputs Here
+            }
         }
     }
 ?>
@@ -124,8 +170,72 @@
                     </p>
                 </div>
             ");
+        ?>
 
-            // Edit Class Form
+        <!-- Add Student Form -->
+        <div class="classesBlock classEditor">
+            <!-- View Header -->
+            <div class="classesBlockHead">
+                <h2 class="classesBlockHeader">Class Students</h2>
+            </div>
+
+            <?php
+                // Fetch Class' Students
+                $studentsQuery = "SELECT *
+                                  FROM stutoclassmap AS scMap
+                                  LEFT JOIN students AS s
+                                  ON scMap.studentID = s.studentID
+                                  WHERE scMap.classID = $classID;";
+                
+                $studentsResult = mysqli_query($conn, $studentsQuery);
+                
+                // Verify Query & Results Exist
+                if ($studentsResult && mysqli_num_rows($studentsResult) > 0) {
+                    // Scrollbar Style Fix
+                    if (mysqli_num_rows($studentsResult) > 5)
+                        echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
+                    else
+                        echo("<div class='classesBlockBody'>");
+                
+                    // For Each Student
+                    while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
+                        // Append Student To List
+                        echo("
+                            <div class='classBlockItem classEditor'>
+                                <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> ($assignedStudent[email], UserID: $assignedStudent[studentID])</h4>
+                            </div>
+                            <hr>
+                        ");
+                    }
+                    
+                    echo("</div>");
+                }
+                else {
+                    // Display No Classes Massage
+                    echo("
+                        <div class='classesBlockBody' style='display: flex; align-items: center; justify-content: center;'>
+                            <p class='classBlockItemInfo'>You have not assigned any students to this class.</p>
+                        </div>
+                    ");
+                }
+
+                // Add Student Inputs
+                echo("
+                    <form method='post'>
+                        <div class='classEditorForm'>
+                            <input type='text' name='studentEmail' class='loginFormElement classEditor' placeholder='Enter Student Email'>
+
+                            <input type='hidden' name='formType' value='addStudent'>
+
+                            <input type='submit' value='Add Student' class='loginFormButton classEditor'>
+                        </div>
+                    </form>
+                ")
+            ?>
+        </div>
+
+        <!-- Edit Class Form -->
+        <?php
             echo("
                 <div class='addClassFormDiv editor'>
                     <p class='loginHeader'>Edit Class</p>
@@ -156,9 +266,6 @@
                     </form>
                 </div>
             ");
-
-            // Add Student Form
-            
         ?>
 
         <!-- Footer -->

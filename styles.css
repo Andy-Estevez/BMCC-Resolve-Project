@@ -682,7 +682,62 @@ label {
 /* Faculty Class Editor Page */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-.addClassFormDiv.editor {
+.classesBlock.classEditor {
+    width: calc(100vw - 765px);
     margin: 48.5px 125px;
     float: left;
+}
+
+.addClassFormDiv.editor {
+    margin: 48.5px 125px;
+    position: relative;
+}
+
+.classBlockItem.classEditor {
+    min-height: calc(20% - 1.6px);
+}
+
+.classEditorForm {
+    margin: 0 16px 16px 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.loginFormElement.classEditor {
+    flex: 1;
+}
+
+.loginFormButton.classEditor {
+    width: 15%;
+    height: 35px;
+    margin-left: 16px;
+    border-radius: 10px;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Faculty Assignment Adder Page */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.addClassFormDiv.assignmentAdder {
+    width: 50%;
+    position: static;
+    margin: 48.5px auto;
+}
+
+.classDateHolder.assignmentAdder {
+    width: 95%;
+}
+
+.loginFormElement.title {
+    flex: 1;
+    margin-right: 16px;
+}
+
+.loginFormElement.desc {
+    width: 95%;
+    height: 50%;
+}
+
+.loginFormButton.assignmentAdder {
+    width: 25%;
 }
