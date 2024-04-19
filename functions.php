@@ -47,6 +47,27 @@
         die;
     }
 
+    // Verify Admin Account Login Status
+    function check_admin_login($conn) {
+        if (isset($_SESSION["adminID"])) {
+            $id = $_SESSION["adminID"];
+
+            // Fetch User Info
+            $query = "select * from admins where adminID = '$id' limit 1";
+
+            $result = mysqli_query($conn, $query);
+
+            // Verify Query & Results Exist
+            if ($result && mysqli_num_rows($result) > 0) {
+                $user_data = mysqli_fetch_assoc($result);
+                return $user_data;
+            }
+        }
+
+        header("Location: login.php");
+        die;
+    }
+
     // Generate Random Num. (ID)
     function random_num($len) {
         $text = "";

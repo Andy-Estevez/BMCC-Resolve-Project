@@ -4,7 +4,7 @@ session_start();
 include("config.php");
 include("functions.php");
 
-$user_data = check_faculty_login($conn);
+$user_data = check_admin_login($conn);
 
 // Check connection
 if ($conn->connect_error) {
