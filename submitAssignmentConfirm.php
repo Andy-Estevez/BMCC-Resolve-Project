@@ -28,7 +28,7 @@
         <title>BMCC Resolve | Assignment Submission Confirmation</title>
     </head>
 
-    <body class="assignmentConfirmBody">
+    <body>
         <!-- Header / Navigation Bar -->
         <nav>
             <!-- Logo -->
@@ -38,7 +38,7 @@
 
             <!-- Button -->
             <div class="NavButtonsContainer">
-                <button type="button" class="navButton" onclick="location.href='studentClass.php?cID=<?php echo($classID) ?>'">Return</button>
+                <button type="button" class="navButton" onclick="location.href='studentClass.php?cID=<?php echo($classID)?>'">Return</button>
             </div>
         </nav>
 
@@ -62,7 +62,7 @@
 
             // Display Class Info Banner
             echo("
-                <div class='classInfo'>
+                <div class='classInfo student'>
                     <p class='classesBlockHeader'><strong>Class</strong>: $classInfo[name] // <strong>Grade</strong>: $classInfo[grade] // <strong>Faculty</strong>: $classInfo[username] // <strong>Email</strong>: $classInfo[email]</p>
                 </div>
             ");
@@ -77,7 +77,7 @@
                         <p class='confText'><strong>Title</strong>: $assignmentTitle</p>
                         <p class='confText'>... For the following class:</p>
                         <p class='confText'><strong>Class</strong>: $classInfo[name]</p>
-                        <p class='confText'>This CANNOT be undone.</p>
+                        <p class='confText'>... This CANNOT be undone.</p>
                         <div class='confButtonHolder'>
                             <button type='button' class='confButton' onclick='location.href=\"studentClass.php?cID=$classID\"'>Cancel</button>
                             <button type='button' class='confButton' onclick='location.href=\"submitAssignment.php?aID=$assignmentID&cID=$classID\"'>Confirm</button>
@@ -86,5 +86,17 @@
                 </div>
             ");
         ?>
+
+        <!-- Footer -->
+        <footer>
+            <a class="footerLink" href="https://maps.app.goo.gl/87HcM8tEhsrWe9wH6" target="_blank">
+                <p class="footerText"><u>
+                    Borough of Manhattan Community College <br>
+                    The City University of New York <br>
+                    199 Chambers Street <br>
+                    New York, NY 10007
+                </u></p>
+            </a>
+        </footer>
     </body>
 </html>

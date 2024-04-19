@@ -64,7 +64,7 @@
                                  LEFT JOIN faculty AS f
                                  ON c.facultyID = f.facultyID 
                                  WHERE $user_data[studentID] = scMap.studentID 
-                                 ORDER BY CAST(SUBSTRING_INDEX(semester, ' ', -1) AS UNSIGNED) DESC;";
+                                 ORDER BY c.year DESC, c.semester ASC;";
 
                 $classesResult = mysqli_query($conn, $classesQuery);
 
@@ -82,7 +82,7 @@
                         echo("
                             <a href='studentClass.php?cID=$assignedClass[classID]' class='classLink'>
                                 <div class='classBlockItem'>
-                                    <h4 class='classBlockItemInfo'><strong>$assignedClass[name]</strong> ~ <strong>$assignedClass[username]</strong> ($assignedClass[semester], $assignedClass[section])</h4>
+                                    <h4 class='classBlockItemInfo'><strong>$assignedClass[name]</strong> ~ <strong>$assignedClass[username]</strong> ($assignedClass[semester] $assignedClass[year], $assignedClass[section])</h4>
                                     <h4 class='classBlockItemInfo'>Grade: $assignedClass[grade]</h4>
                                 </div>
                             </a>

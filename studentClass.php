@@ -66,7 +66,7 @@
 
             // Display Class Info Banner
             echo("
-                <div class='classInfo'>
+                <div class='classInfo student'>
                     <p class='classesBlockHeader'>
                         <strong>Class</strong>: $classInfo[name] // 
                         <strong>Grade</strong>: $classInfo[grade] // 

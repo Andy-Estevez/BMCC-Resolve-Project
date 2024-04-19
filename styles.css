@@ -203,8 +203,7 @@ footer.abs {
 /* Log In / Sign Up Pages */
 /* ~~~~~~~~~~~~~~~~~~~~~~ */
 
-.loginBody,
-.assignmentConfirmBody {
+.loginBody {
     background-image: url('Elements/BMCC-logo-no-type-gray.png');
     background-size: 100px;
     animation: animate-loginBody-bg 5s infinite linear;
@@ -394,8 +393,7 @@ label {
     background-color: #003884;
 }
 
-.profileText,
-.confText {
+.profileText {
     color: white;
     margin-left: 15px;
 }
@@ -416,6 +414,10 @@ label {
     border-top: 2px solid white;
     border-bottom: 2px solid white;
     background-color: #003884;
+}
+
+.classInfo.student {
+    justify-content: center;
 }
 
 .assignmentBlock {
@@ -484,7 +486,7 @@ label {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .confDiv {
-    height: calc(100vh - 179px);
+    height: calc(100vh - 278.5px);
     width: 25vw;
     margin: 25px auto 25px auto;
     border-radius: 15px;
@@ -505,6 +507,11 @@ label {
     background-color: #003884;
 }
 
+.confText {
+    color: white;
+    margin: 10px;
+}
+
 .confButtonHolder {
     display: flex;
     flex-direction: row;
@@ -514,7 +521,7 @@ label {
 .confButton {
     height: 35px;
     width: 33%;
-    margin: 20px;
+    margin: 0 20px 10px 20px;
     background-color: rgb(255, 255, 255);
     border-color: rgba(230, 230, 230, 0);
     border-style: solid;
@@ -734,24 +741,3 @@ label {
     background-size: 80%;
     background-repeat: no-repeat;
 }
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* Faculty Home Page */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-.calendar-container#leftAligned {
-    width: calc(100vw - 765px);
-    margin: 75px 125px;
-    float: left;
-  }
-
-  .calendar-container {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-  }
-  
-  .calendar-container img {
-    margin-bottom: 5px; 
-  }
-  
