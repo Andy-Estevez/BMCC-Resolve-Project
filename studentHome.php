@@ -13,8 +13,8 @@
             <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
         </a>
         <div class="NavButtonsContainer">
-            <button type="button" class="navButton" onclick="location.href='student_home.php'">Home</button>
-            <button type="button" class="navButton" onclick="location.href='studentClass.php'">Classes</button>
+            <button type="button" class="navButton" onclick="location.href='studentHome.php'">Home</button>
+            <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Console</button>
             <button type="button" class="navButton" onclick="location.href='studentProfile.php'">Profile</button>
             <button type="button" class="navButton" id="login" onclick="location.href='login.php'">Log In</button>
         </div>
