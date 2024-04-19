@@ -38,7 +38,7 @@
                 $studentsResult = mysqli_query($conn, $studentsQuery);
 
                 // Verify Query
-                if (!$studentResult)
+                if (!$studentsResult)
                     die("ERROR: Could not acquire student count for class with ID " + $classID);
 
                 // For Each Student
