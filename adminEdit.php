@@ -34,7 +34,7 @@ if ($conn->connect_error) {
 </nav>
 
 
-<div class="addClassFormDiv">
+<div class="addClassFormDiv assignmentAdder">
     <p class="loginHeader">Swap Faculty </p>
     <form class="loginForm" method="post">
         <input type="text" name="faculty1" id="faculty1" list="faculty1List" placeholder="Enter first faculty..." required>
