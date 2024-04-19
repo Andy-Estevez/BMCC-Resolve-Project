@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         while ($professor = mysqli_fetch_assoc($professorsResult)) {
                             echo("
                                 <div class='professorBlockItem'>
-                                    <h4 class='professorBlockItemInfo'>Professor: $professor[username]</h4>
+                                    <h4 class='classBlockItemInfo'>Professor: $professor[username]</h4>
                                 </div>
                                 <hr>
                             ");

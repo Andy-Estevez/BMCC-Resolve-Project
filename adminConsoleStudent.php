@@ -73,8 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <?php
                 $classesQuery = "SELECT classID
-                                FROM classes AS c
-                                WHERE c.facultyID = $user_data[facultyID]";
+                                FROM classes AS c";
 
                 $studentsQuery = "SELECT DISTINCT s.*
                                 FROM students AS s
@@ -105,10 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
 
                         echo("
-                            <a href='facultyStudentView.php?studentID=$assignedStudent[studentID]' class='studentLink'>
+                            <a href='facultyStudentView.php?studentID=$assignedStudent[studentID]' class='classLink'>
                                 <div class='studentBlockItem'>
-                                    <h4 class='studentBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
-                                    <h4 class='studentBlockItemInfo'>Classes: $classCount</h4>
+                                    <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
+                                    <h4 class='classBlockItemInfo'>Classes: $classCount</h4>
                                 </div>
                             </a>
                             <hr>
