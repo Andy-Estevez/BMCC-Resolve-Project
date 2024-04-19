@@ -32,13 +32,12 @@
         </div>
       </div>
       
-   <div class="container">
-    <div class="inc_info">
+  
       <h2>Inc grade info</h2>
       <p>Term’s work incomplete. Instructor has reasonable expectation that the student can receive a passing grade after completing the missing assignment(s) and agrees to work with the student to make up the missing work. Student must also agree with the faculty to make the missing work before the INC deadline which is published on BMCC Academic Calendar on the web. The “INC” grade reverts to an “FIN” if a change is not made by deadline.</p>
     </div>
   
-    <div class="study_tips">
+    
       <h2>Study Tips</h2>
       <ul>
         <li>Create a Schedule: <br> Establish a study schedule that includes dedicated time slots for each subject.</li>
@@ -48,8 +47,7 @@
         <li>Stay Organized: <br> Keep your study space organized and free from distractions Use tools like planners, calendars, or digital apps to keep track of deadlines</li>
         <li>Seek Clarification: <br> Dont hesitate to ask questions or seek clarifications from teachers, classmates, or online resources when you encounter difficulties</li>
       </ul>
-    </div>
-  </div>
+    
   
   <!-- Footer -->
   <footer>
