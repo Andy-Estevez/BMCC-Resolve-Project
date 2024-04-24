@@ -47,7 +47,7 @@
                     echo("
                         <p class='profileText'><strong>Username</strong>: $user_data[username]</p>
                         <hr>
-                        <p class='profileText'><strong>UserID</strong>: $user_data[facultyID]</p>
+                        <p class='profileText'><strong>UserID</strong>: $user_data[adminID]</p>
                         <hr>
                         <p class='profileText'><strong>Email</strong>: $user_data[email]</p>
                     ");
