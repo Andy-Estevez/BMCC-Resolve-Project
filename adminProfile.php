@@ -39,7 +39,7 @@
 
         <!-- Content -->
         <div class="profileDiv">
-            <p class="profileHeader">Profile</p>
+            <p class="profileHeader">Admin Profile</p>
 
             <!-- User Info -->
             <div class="profileBody">
