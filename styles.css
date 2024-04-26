@@ -918,3 +918,28 @@ label {
     width: 160px;
     margin-bottom: 16px;
 }
+
+/* ~~~~~~~~~~~~~~~~~ */
+/* Assignment Grader */
+/* ~~~~~~~~~~~~~~~~~ */
+
+.classesBlock.assignmentGrader {
+    width: 25%;
+    margin: 48.5px auto;
+}
+
+.classBlockItem.assignmentGrader {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginFormElement.assignmentGrader {
+    width: 125px;
+}
+
+.loginFormButton.assignmentGrader {
+    width: 125px;
+    margin: 20px 0;
+}
