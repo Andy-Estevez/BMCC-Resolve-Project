@@ -22,7 +22,8 @@
     // Verify Query Successful
     if (mysqli_query($conn, $removeQuery)) {
         header("Location: facultyEditClass.php?cID=$classID");
-    } else {
+    } 
+    else {
         die("ERROR: Failed to remove student.");
     }
 ?>

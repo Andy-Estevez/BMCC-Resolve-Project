@@ -17,7 +17,7 @@
     $classID = $_GET["cID"];
     $assignmentID = $_GET["aID"];
 
-    // When A Form Is Submitted
+    // When Grade Update Form Is Submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $studentID = $_POST["studentID"];
         $grade = $_POST["grade"];
@@ -32,6 +32,7 @@
 
             if ($updateResult) {
                 header("Location: assignmentSubmissions.php?cID=$classID&aID=$assignmentID");
+                die;
             }
             else {
                 die("ERROR: Could not update grade.");
@@ -45,7 +46,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Class Viewer</title>
+        <title>BMCC Resolve | Assignment Submissions</title>
     </head>
 
     <body>
@@ -125,7 +126,7 @@
             <!-- Header -->
             <div class="classesBlockHead">
                 <h2 class="classesBlockHeader">Submissions</h2>
-                <p class="classesBlockHeader"><strong>Assignment Title</strong>: <?php echo($assignmentTitle); ?></p>
+                <!-- <p class="classesBlockHeader"><strong>Assignment Title</strong>: <?php echo($assignmentTitle); ?></p> -->
             </div>
 
             <!-- Body -->

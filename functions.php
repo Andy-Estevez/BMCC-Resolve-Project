@@ -68,7 +68,7 @@
         die;
     }
 
-    // Generate Random Num. (ID)
+    // Generate Random Number (ID)
     function random_num($len) {
         $text = "";
         

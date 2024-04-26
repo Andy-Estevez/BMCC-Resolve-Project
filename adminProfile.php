@@ -7,6 +7,7 @@
 <!-- Faculty Profile Page -->
 
 <?php
+    // PHP / Data Set Up
     session_start();
 
     include("config.php");
@@ -23,12 +24,15 @@
         <title>BMCC Resolve | Admin Profile</title>
     </head>
 
-    <body>
+    <body class="loginBody">
         <!-- Header / Navigation Bar -->
         <nav>
+            <!-- Logo -->
             <a href="facultyHome.php">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
+
+            <!-- Buttons -->
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='adminHome.php'">Home</button>
                 <button type="button" class="navButton" onclick="location.href='adminConsoleClasses.php'">Console</button>
@@ -39,6 +43,7 @@
 
         <!-- Content -->
         <div class="profileDiv">
+            <!-- Header -->
             <p class="profileHeader">Admin Profile</p>
 
             <!-- User Info -->

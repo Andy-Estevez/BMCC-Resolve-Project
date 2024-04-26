@@ -47,6 +47,7 @@
 
         <!-- Profile Div -->
         <div class="profileDiv">
+            <!-- Header -->
             <p class="profileHeader">Faculty Profile</p>
 
             <!-- Profile Body -->

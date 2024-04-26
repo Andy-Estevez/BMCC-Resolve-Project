@@ -3,7 +3,7 @@
 session_start();
 include("config.php");
 include("functions.php");
-$user_data = check_faculty_login($conn);
+$user_data = check_admin_login($conn);
 
 // Retrieve classID from URL parameter
 $classID = isset($_GET['cID']) ? $_GET['cID'] : null;
@@ -62,9 +62,9 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
 
         <!-- Buttons -->
         <div class="NavButtonsContainer">
-            <button type="button" class="navButton" onclick="location.href='facultyHome.php'">Home</button>
-            <button type="button" class="navButton" onclick="location.href='facultyConsoleClasses.php'">Console</button>
-            <button type="button" class="navButton" onclick="location.href='facultyProfile.php'">Profile</button>
+            <button type="button" class="navButton" onclick="location.href='adminHome.php'">Home</button>
+            <button type="button" class="navButton" onclick="location.href='adminConsoleClasses.php'">Console</button>
+            <button type="button" class="navButton" onclick="location.href='adminProfile.php'">Profile</button>
             <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
         </div>
     </nav>
@@ -159,22 +159,5 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
         echo("<h3 style='position: absolute; top: 55%; left: 50%; transform: translate(-50%, 0)'>You have not created any assignments.</h3>");
     }
     ?>
-
- 
-    <!-- IBM Watson Chatbot -->
-    <script>
-        window.watsonAssistantChatOptions = {
-            integrationID: "1db7fbd1-e4f7-4a21-8299-7b79b90d0406", // The ID of this integration.
-            region: "us-east", // The region your integration is hosted in.
-            serviceInstanceID: "ae83b918-3f7e-463e-a2ac-8327cd35ef06", // The ID of your service instance.
-            onLoad: async (instance) => { await instance.render(); }
-        };
-        setTimeout(function(){
-            const t=document.createElement('script');
-            t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
-            document.head.appendChild(t);
-        });
-    </script>
-
 </body>
 </html>

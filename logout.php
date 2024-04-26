@@ -18,6 +18,11 @@
         unset($_SESSION["facultyID"]);
     }
 
+    // If Admin Logged In, Log Out
+    if (isset($_SESSION["adminID"])) {
+        unset($_SESSION["adminID"]);
+    }
+
     // Redirect To Landing Page
     header("Location: index.html");
     die;

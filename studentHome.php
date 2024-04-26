@@ -16,7 +16,7 @@
             <button type="button" class="navButton" onclick="location.href='studentHome.php'">Home</button>
             <button type="button" class="navButton" onclick="location.href='studentConsole.php'">Console</button>
             <button type="button" class="navButton" onclick="location.href='studentProfile.php'">Profile</button>
-            <button type="button" class="navButton" id="login" onclick="location.href='login.php'">Log In</button>
+            <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
         </div>
     </nav>
    
