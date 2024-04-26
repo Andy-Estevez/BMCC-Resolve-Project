@@ -51,17 +51,17 @@
                     // Init Session Data & Redirect User To Appropriate Console
                     if ($accountType == "student") {
                         $_SESSION["studentID"] = $user_data["studentID"];
-                        header("Location: studentConsole.php");
+                        header("Location: studentHome.php");
                         die;
                     }
                     else if ($accountType == "faculty") {
                         $_SESSION["facultyID"] = $user_data["facultyID"];
-                        header("Location: facultyConsoleClasses.php");
+                        header("Location: facultyHome.php");
                         die;
                     }
                     else if ($accountType == "admin") {
                         $_SESSION["adminID"] = $user_data["adminID"];
-                        header("Location: adminConsoleClasses.php");
+                        header("Location: adminHome.php");
                         die;
                     }
                     else {
