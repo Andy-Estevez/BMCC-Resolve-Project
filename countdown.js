@@ -1,33 +1,32 @@
-// Get the form and countdown container elements
-var countdownForm = document.getElementById('countdown-form');
-var countdownContainer = document.getElementById('countdown-container');
+// Wrap your code inside a DOMContentLoaded event listener
+document.addEventListener("DOMContentLoaded", function() {
+  // Add your event listener to the form
+  document.getElementById("countdownForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
 
-// Add event listener to handle form submission
-countdownForm.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent default form submission behavior
+    // Get the deadline datetime from the input
+    const deadlineInput = document.getElementById("deadlineInput").value;
+    const deadline = new Date(deadlineInput).getTime();
 
-  // Extract deadline from the input field
-  var deadline = document.getElementById('deadline').value;
+    // Calculate time remaining
+    const now = new Date().getTime();
+    const timeRemaining = deadline - now;
 
+    // Update countdown display
+    if (timeRemaining > 0) {
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-  // Store deadline in local storage
-  localStorage.setItem('countdownDeadline', deadline);
-
-  // Clear the countdown container 
-  countdownContainer.innerHTML = "";
-
-});
-
-// Check for stored deadline on page load
-var storedDeadline = localStorage.getItem('countdownDeadline');
-
-if (storedDeadline) {
-  // Initialize countdown timer with stored deadline
-  var countdown = new CountdownTimer({
-    container: countdownContainer,
-    endDate: storedDeadline,
-    units: ['months', 'days', 'hours'],
-    labels: ['months', 'days', 'hours'],
-    format: '{<M>}m {<D>}d {<H>}h',
+      const countdownContainer = document.getElementById("countdown-container");
+      countdownContainer.innerHTML = `
+        <p>Time remaining until deadline:</p>
+        <p>${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</p>
+      `;
+    } else {
+      const countdownContainer = document.getElementById("countdown-container");
+      countdownContainer.innerHTML = `<p>The deadline has passed.</p>`;
+    }
   });
-}
+});

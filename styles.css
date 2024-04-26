@@ -826,3 +826,47 @@ label {
 .loginFormButton.assignmentAdder {
     width: 25%;
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Faculty Home content */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    margin-bottom: 100px;
+}
+
+.flex-item-1{
+    flex:  1;
+    width: 55%;
+    border: 1px solid black;
+    margin-left: 20px;
+}
+
+.flex-item-2{
+    margin-right: 20px;
+    color: white;
+    background-color: #003884;
+}
+
+#welcome-title {
+    margin: 0;
+    margin-top: 20px;
+    color: white;
+    background-color: #003884;
+    text-align: center;
+}
+
+#assignments-title {
+    margin: 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .assignment-title{
+    color: white;
+  }

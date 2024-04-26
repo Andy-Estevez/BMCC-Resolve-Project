@@ -21,32 +21,101 @@
     </nav>
    
 
-    <div class="progress_box">
-        <h2>Progress</h2>
-        <div class="classes_container">
-          <span class="classes">PHYS 215</span>
-          <span class="classes">CSC 301</span>
-          <span class="classes">ENG 111</span>
-          <span class="classes">GYM 101</span>
-          <span class="classes">ART 108</span>
-        </div>
-      </div>
+    <!--<div class="progress_box">-->
+        <!--<h2>Progress</h2>-->
+        <!--<div class="classes_container">-->
+        <!--  <span class="classes">PHYS 215</span>-->
+         <!-- <span class="classes">CSC 301</span>-->
+         <!-- <span class="classes">ENG 111</span>-->
+          <!--<span class="classes">GYM 101</span>-->
+         <!-- <span class="classes">ART 108</span>-->
+        <!--</div>-->
+     <!-- </div>-->
       
-  
-      <h2>Inc grade info</h2>
-      <p>Term’s work incomplete. Instructor has reasonable expectation that the student can receive a passing grade after completing the missing assignment(s) and agrees to work with the student to make up the missing work. Student must also agree with the faculty to make the missing work before the INC deadline which is published on BMCC Academic Calendar on the web. The “INC” grade reverts to an “FIN” if a change is not made by deadline.</p>
-    </div>
-  
+
+  <div class="container">
+  <div class="flex-item-1">
+    <h2 id="welcome-title"> Inc grade info</h2>
+    <p>Term’s work incomplete. Instructor has reasonable expectation that the student can receive a passing grade after completing the missing assignment(s) and agrees to work with the student to make up the missing work. Student must also agree with the faculty to make the missing work before the INC deadline which is published on BMCC Academic Calendar on the web. The “INC” grade reverts to an “FIN” if a change is not made by deadline.</p>
+   </div>
+
+  <div class="flex-item-2">
+    <h2 id="assignments-title"> Assignments</h2>
+       <hr>
+    <?php
+        // PHP / Data Set Up
+        session_start();
+        
+        include("config.php");
+        include("functions.php");
+                   
+        // SQL query to select top 10 assignments due soonest
+        $sql = "SELECT title, dueDate FROM assignments ORDER BY dueDate ASC LIMIT 10";
+        $result = $conn->query($sql);
+        
+        // Fetch data and display in the format you want
+        if ($result && $result->num_rows > 0) {
+            // Output data of each row
+            while($row = $result->fetch_assoc()) {
+                // Output assignment title
+                echo '<div class="assignment">';
+                echo '<h3 class="assignment-title">' . $row["title"] . '</h3>';
+                
+                // Output assignment due date
+                echo '<p class="due-date">Due: ' . $row["dueDate"] . '</p>';
+                
+                // Output the countdown span
+                echo '<div class="countdown" id="countdown-' . $row["title"] . '"></div>';
+                
+                // JavaScript for countdown
+                echo '<script>';
+                echo 'function updateCountdown_' . $row["title"] . '() {';
+                echo '    const now = new Date();';
+                echo '    const dueDate = new Date("' . $row["dueDate"] . '");';
+                echo '    const diffInMs = dueDate - now;';
+                echo '';
+                echo '    if (diffInMs <= 0) {';
+                echo '        document.getElementById("countdown-' . $row["title"] . '").textContent = "Due";';
+                echo '    } else {';
+                echo '        const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));';
+                echo '        const hours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));';
+                echo '        const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));';
+                echo '        const seconds = Math.floor((diffInMs % (1000 * 60)) / 1000);';
+                echo '';
+                echo '        const formattedTime = days + "d " + hours + "h " + minutes + "m " + seconds + "s";';
+                echo '        document.getElementById("countdown-' . $row["title"] . '").textContent = formattedTime;';
+                echo '    }';
+                echo '}';
+                echo '';
+                echo 'setInterval(updateCountdown_' . $row["title"] . ', 1000);';
+                echo 'updateCountdown_' . $row["title"] . '(); // Initial call to update immediately';
+                echo '</script>';
+                
+                echo '</div>';
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
+  </div>
+</div>
     
-      <h2>Study Tips</h2>
-      <ul>
-        <li>Create a Schedule: <br> Establish a study schedule that includes dedicated time slots for each subject.</li>
-        <li>Set Goals: <br> Clearly define your study goals, break them down into smaller achievement tasks</li>
-        <li>Use Active learning techniques: <br> Engage with the material actively by summarizing, questioning, or teaching the concepts to someone else</li>
-        <li>Take Breaks: <br> Dont forget to take short breaks during long study sessions</li>
-        <li>Stay Organized: <br> Keep your study space organized and free from distractions Use tools like planners, calendars, or digital apps to keep track of deadlines</li>
-        <li>Seek Clarification: <br> Dont hesitate to ask questions or seek clarifications from teachers, classmates, or online resources when you encounter difficulties</li>
-      </ul>
+  
+ <!-- IBM Watson Chatbot -->
+ <script>
+            window.watsonAssistantChatOptions = {
+              integrationID: "1db7fbd1-e4f7-4a21-8299-7b79b90d0406", // The ID of this integration.
+              region: "us-east", // The region your integration is hosted in.
+              serviceInstanceID: "ae83b918-3f7e-463e-a2ac-8327cd35ef06", // The ID of your service instance.
+              onLoad: async (instance) => { await instance.render(); }
+            };
+            setTimeout(function(){
+              const t=document.createElement('script');
+              t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+              document.head.appendChild(t);
+            });
+ </script>
+
     
   
   <!-- Footer -->
@@ -60,6 +129,7 @@
         </u></p>
     </a>
 </footer>
+
 
 
 

@@ -74,9 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="button" class="adminConsoleButton" onclick="location.href='adminConsoleFaculty.php'" >Faculty</button>
                 <button type="button" class="adminConsoleButton" onclick="location.href='adminConsoleStudent.php'" >Students</button>
             </div>
+            
             <!-- Search Bar -->
             <input type="text" class="searchBar" placeholder="Search">
-            
+           
             
             <?php
             $classesQuery = "SELECT *

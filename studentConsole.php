@@ -103,6 +103,22 @@
             ?>
         </div>
 
+         <!-- IBM Watson Chatbot -->
+    <script>
+        window.watsonAssistantChatOptions = {
+            integrationID: "1db7fbd1-e4f7-4a21-8299-7b79b90d0406", // The ID of this integration.
+            region: "us-east", // The region your integration is hosted in.
+            serviceInstanceID: "ae83b918-3f7e-463e-a2ac-8327cd35ef06", // The ID of your service instance.
+            onLoad: async (instance) => { await instance.render(); }
+        };
+        setTimeout(function(){
+            const t=document.createElement('script');
+            t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+
+
         <!-- Footer -->
         <footer>
             <a class="footerLink" href="https://maps.app.goo.gl/87HcM8tEhsrWe9wH6" target="_blank">

@@ -1,5 +1,4 @@
 
-
 <?php
     session_start();
     
@@ -19,16 +18,12 @@ if ($conn->connect_error) {
 // Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $notificationID = $_POST["notificationID"];
-    $facultyID = $_POST["facultyID"];
-    $studentID = $_POST["studentID"];
-    $classID = $_POST["classID"];
+    $Title = $_POST["Title"];
     $message = $_POST["Message"];
-    $timestamp = $_POST["Timestamp"];
-    $status = $_POST["Status"];
+   
 
     // Insert data into the table
-    $sql = "INSERT INTO notifications (notificationID, facultyID, studentID, classID, Message, Timestamp, Status) VALUES ('$notificationID', '$facultyID', '$studentID', '$classID', '$message', '$timestamp', '$status')";
+    $sql = "INSERT INTO notifications (Title,  Message) VALUES ('$Title', '$message')";
     
     if ($conn->query($sql) === TRUE) {
         echo "Announcement sent successfully";
@@ -40,16 +35,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!DOCTYPE html>
+
+<!-- Andy Estevez -->
+<!-- BMCC Tech Innovation Hub Internship -->
+<!-- Spring Semester 2024 -->
+<!-- BMCC Resolve Project -->
+<!-- Admin Console (Classes) Page -->
+
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Send Announcement</title>
-</head>
-<body>
-<!-- Header / Navigation Bar -->
-<nav>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>BMCC Resolve | Admin Console</title>
+    </head>
+
+    <body>
+    <nav>
             <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
                 <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
             </a>
