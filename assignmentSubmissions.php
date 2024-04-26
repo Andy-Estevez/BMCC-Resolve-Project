@@ -119,6 +119,8 @@
             }
 
             $assignmentTitle = mysqli_fetch_assoc($assignmentTitleResult)["title"];
+
+            echo("<h3 style='text-align: center; height: 25px; margin: 10px 0;'>$assignmentTitle</h3>");
         ?>
 
         <!-- Submission List -->
@@ -159,7 +161,7 @@
                             echo("
                                 <div class='classBlockItem assignmentGrader'>
                                     <h4 class='classBlockItemInfo'><strong>$student[username]</strong> ($student[studentID])</h4>
-                                    <form method='post'>
+                                    <form method='post' style='display: flex; flex-direction: column; align-items: center;'>
                                         <input type='hidden' name='studentID' value='$student[studentID]'>
                                         <input type='text' name='grade' class='loginFormElement assignmentGrader' placeholder='Enter Grade'>
                                         <input type='submit' value='Assign Grade' class='loginFormButton assignmentGrader'>
