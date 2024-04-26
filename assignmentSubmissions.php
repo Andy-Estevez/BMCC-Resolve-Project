@@ -174,6 +174,7 @@
                     }
                     else {
                         // Handle No Submissions Here
+                        echo("<h4 style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, 0); color: white;'>There are no submissions at this time.</h4>");
                     }
                 ?>
             </div>
