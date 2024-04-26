@@ -953,19 +953,25 @@ label {
     justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
-    height: 100vh;
-    margin-bottom: 100px;
+    height: calc(100vh - 175px);
 }
 
 .flex-item-1{
+    padding-left: 125px;
+    margin-right: 10px;
     flex:  1;
     width: 55%;
-    border: 1px solid black;
-    margin-left: 20px;
+    height: 100%;
 }
 
 .flex-item-2{
-    margin-right: 20px;
+    height: calc(100% - 3px);
+    width: 273px;
+    padding: 0 20px;
+    border-top: 2px solid lightgray;
+    border-left: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    overflow: auto;
     color: white;
     background-color: #003884;
 }
@@ -973,8 +979,7 @@ label {
 #welcome-title {
     margin: 0;
     margin-top: 20px;
-    color: white;
-    background-color: #003884;
+    color: var(--BMCC-Blue);
     text-align: center;
 }
 

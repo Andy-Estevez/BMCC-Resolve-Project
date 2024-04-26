@@ -126,7 +126,6 @@
             <!-- Header -->
             <div class="classesBlockHead">
                 <h2 class="classesBlockHeader">Submissions</h2>
-                <!-- <p class="classesBlockHeader"><strong>Assignment Title</strong>: <?php echo($assignmentTitle); ?></p> -->
             </div>
 
             <!-- Body -->

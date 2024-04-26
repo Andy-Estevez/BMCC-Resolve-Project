@@ -27,7 +27,7 @@
   </div>
 
   <div class="flex-item-2">
-    <h2 id="assignments-title"> Assignments</h2>
+    <h2 id="assignments-title">Pressing Assignments</h2>
       <hr>
     <?php
         // PHP / Data Set Up
@@ -47,7 +47,7 @@
             // Output data of each row
             while($row = $result->fetch_assoc()) {
                 // Output assignment title
-                echo '<div class="assignment">';
+                echo '<div class="assignment" style="padding: 10px; margin: 10px 0; border-radius: 20px; background-color: #002874;">';
                 echo '<h3 class="assignment-title">' . $row["title"] . '</h3>';
                 
                 // Output assignment due date
@@ -89,6 +89,18 @@
   </div>
 </div>
 
+<footer>
+  <a class="footerLink" href="https://maps.app.goo.gl/87HcM8tEhsrWe9wH6" target="_blank">
+    <p class="footerText">
+      <u>Borough of Manhattan Community College <br>
+        The City University of New York <br>
+        199 Chambers Street <br>
+        New York, NY 10007
+      </u>
+    </p>
+  </a>
+</footer>
+
 <!-- IBM Watson Chatbot -->
 <script>
             window.watsonAssistantChatOptions = {
@@ -105,16 +117,5 @@
  </script>
 
 
-  <footer>
-    <a class="footerLink" href="https://maps.app.goo.gl/87HcM8tEhsrWe9wH6" target="_blank">
-      <p class="footerText">
-        <u>Borough of Manhattan Community College <br>
-          The City University of New York <br>
-          199 Chambers Street <br>
-          New York, NY 10007
-        </u>
-      </p>
-    </a>
-  </footer>
 </body>
 </html>

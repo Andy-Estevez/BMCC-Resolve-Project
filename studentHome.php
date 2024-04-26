@@ -40,7 +40,7 @@
    </div>
 
   <div class="flex-item-2">
-    <h2 id="assignments-title"> Assignments</h2>
+    <h2 id="assignments-title">Pressing Assignments</h2>
        <hr>
     <?php
         // PHP / Data Set Up
@@ -58,7 +58,7 @@
             // Output data of each row
             while($row = $result->fetch_assoc()) {
                 // Output assignment title
-                echo '<div class="assignment">';
+                echo '<div class="assignment" style="padding: 10px; margin: 10px 0; border-radius: 20px; background-color: #002874;">';
                 echo '<h3 class="assignment-title">' . $row["title"] . '</h3>';
                 
                 // Output assignment due date
