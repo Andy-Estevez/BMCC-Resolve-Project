@@ -21,33 +21,52 @@
         $assignmentTitle = $_POST["assignmentTitle"];
         $assignmentDescription = $_POST["assignmentDescription"];
         $assignmentDueDate = $_POST["assignmentDueDate"];
+        $selectedStudents = $_POST["selectedStudents"];
 
         // Verify Inputs Not Empty
         if (!empty($assignmentTitle) && !empty($assignmentDescription) && !empty($assignmentDueDate)) {
-            // Create New Class Entry
+            // Create New Assignment Entry
             $query = "INSERT INTO assignments (assignments.facultyID, assignments.classID, assignments.title, assignments.description, assignments.dueDate)
                       VALUES ('$user_data[facultyID]', '$classID', '$assignmentTitle', '$assignmentDescription', '$assignmentDueDate');";
 
             // Verify Query Successful
             if (mysqli_query($conn, $query)) {
-                // Fetch Class' Student Count
-                $studentsQuery = "SELECT *
-                                 FROM stuToClassMap AS scMap
-                                 WHERE scMap.classID = $classID";
+                // If Students Were Selected
+                if (isset($selectedStudents)) {
+                    // Fetch Assignment ID
+                    $assignmentIDQuery = "SELECT assignmentID
+                                          FROM assignments AS a
+                                          WHERE a.classID = $classID AND a.title = '$assignmentTitle'
+                                          AND a.description = '$assignmentDescription' AND a.dueDate = '$assignmentDueDate';";
+    
+                    $assignmentIDResult = mysqli_query($conn, $assignmentIDQuery);
 
-                $studentsResult = mysqli_query($conn, $studentsQuery);
+                    if (!$assignmentIDResult) {
+                        die("ERROR: Could not acquire assignment ID.");
+                    }
 
-                // Verify Query
-                if (!$studentsResult)
-                    die("ERROR: Could not acquire student count for class with ID " + $classID);
+                    $assignmentID = mysqli_fetch_assoc($assignmentIDResult)["assignmentID"];
 
-                // For Each Student
-                while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
-                    // Add to staMap
+                    // For Each Selected Student
+                    foreach ($selectedStudents as $studentID) {
+                        $assignQuery = "INSERT INTO stutoassignmentmap (stutoassignmentmap.studentID, stutoassignmentmap.assignmentID,
+                                                                        stutoassignmentmap.classID, stutoassignmentmap.completionStatus)
+                                        VALUES ('$studentID', '$assignmentID', '$classID', '0');";
+
+                        // Assign Student To Assignment
+                        $assignResult = mysqli_query($conn, $assignQuery);
+
+                        if (!$assignResult) {
+                            die("ERROR: Failed to assign student to assignment.");
+                        }
+                    }
+                }
+                else {
+                    // Handle No Selected Students Here
                 }
             } 
             else {
-                die("ERROR: Class creation failed.");
+                die("ERROR: Assignment creation failed.");
             }
         }
     }
@@ -124,14 +143,59 @@
         <div class="addClassFormDiv assignmentAdder">
             <p class="loginHeader">Add Assignment</p>
 
-            <form class="loginForm" method="post">
-                <div class="classDateHolder assignmentAdder">
-                    <input type="text" name="assignmentTitle" class="loginFormElement title" placeholder="Enter Assignment Title">
-                    <input type="datetime-local" name="assignmentDueDate" class="loginFormElement" placeholder="Enter Assignment Deadline">
-                </div>
+            <form class="loginForm assignmentAdder" method="post">
+                <div class="assignmentAdderSubBody">
+                    <!-- Assignment Information -->
+                    <div class="assignmentInfoHolder">
+                        <div class="classDateHolder assignmentAdder">
+                            <input type="text" name="assignmentTitle" class="loginFormElement title" placeholder="Enter Assignment Title">
+                            <input type="datetime-local" name="assignmentDueDate" class="loginFormElement">
+                        </div>
+        
+                        <input type="text" name="assignmentDescription" class="loginFormElement desc" placeholder="Enter Assignment Description">
+                    </div>
 
-                <!-- Assignment Description -->
-                <input type="text" name="assignmentDescription" class="loginFormElement desc" placeholder="Enter Assignment Description">
+                    <!-- Student List -->
+                    <div class="assignmentStudentListHolder">
+                        <p class="assignmentAdderSubHeader">Select Students</p>
+
+                        <div class="assignmentStudentListDiv">
+                            <?php
+                                // Fetch Class' Students
+                                $studentsQuery = "SELECT *
+                                                  FROM stutoclassmap AS scMap
+                                                  LEFT JOIN students AS s
+                                                  ON scMap.studentID = s.studentID
+                                                  WHERE scMap.classID = $classID;";
+                                
+                                $studentsResult = mysqli_query($conn, $studentsQuery);
+
+                                // Verify Query & Results Exist
+                                if ($studentsResult && mysqli_num_rows($studentsResult) > 0) {
+                                    // For Each Student
+                                    while ($classStudent = mysqli_fetch_assoc($studentsResult)) {
+                                        // Append Student To List
+                                        echo("
+                                            <div class='assignmentStudentDiv'>
+                                                <input type='checkbox' id='$classStudent[studentID]' name='selectedStudents[]' value='$classStudent[studentID]' class='assignmentStudentCheckbox'>
+                                                <label for='$classStudent[studentID]' class='assignmentStudentLabel'>$classStudent[username] ($classStudent[studentID])</label>
+                                            </div>
+                                            <hr>
+                                        ");
+                                    }
+                                }
+                                else {
+                                    // Display No Students Message
+                                    echo("
+                                        <div class='classesBlockBody' style='height: 100%; margin: 0 8px; border-width: 0; background-color: white; display: flex; align-items: center; justify-content: center;'>
+                                            <p class='classBlockItemInfo' style='color: #003884'>You have not assigned any students to this class.</p>
+                                        </div>
+                                    ");
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
 
                 <input type="submit" value="Create Assignment" class="loginFormButton assignmentAdder">
             </form>

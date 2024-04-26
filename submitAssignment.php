@@ -16,7 +16,9 @@
     $classID = $_GET["cID"];
 
     // Update Assignment Status
-    $updateQuery = "UPDATE stutoassignmentmap SET completionStatus = 1 WHERE assignmentID = $assignmentID";
+    $updateQuery = "UPDATE stutoassignmentmap 
+                    SET completionStatus = 1 
+                    WHERE assignmentID = $assignmentID AND studentID = $user_data[studentID];";
 
     // Verify Query Successful
     if (mysqli_query($conn, $updateQuery)) {
