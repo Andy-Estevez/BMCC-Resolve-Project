@@ -335,7 +335,7 @@ label {
     min-height: calc(33.33% - 1.6px);
     border-style: solid;
     border-color: white;
-    border-width: 0 0 0px 0;
+    border-width: 0;
     overflow: hidden;
     transition: background-color 0.25s;
 }
@@ -607,9 +607,9 @@ label {
     background: linear-gradient(var(--BMCC-Blue), #004894);
 }
 
-/*~~~~~~~~~~~~~~~~*/
+/* ~~~~~~~~~~~~ */
 /* student home */
-/*~~~~~~~~~~~~~*/
+/* ~~~~~~~~~~~~ */
 
 .placeholder {
     background-color: white;
@@ -676,8 +676,9 @@ label {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .assignmentCornerButton {
-    height: 35px;
     width: 35px;
+    height: 35px;
+    min-width: 35px;
     border: 2px solid rgb(255, 255, 255);
     border-radius: 17.5px;
     background-color: rgba(255, 255, 255, 0);
@@ -742,9 +743,9 @@ label {
     background-repeat: no-repeat;
 }
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~  */
 /* Faculty Home Page */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~ */
 
 .calendar-container#leftAligned {
     width: calc(100vw - 765px);
@@ -762,24 +763,44 @@ label {
     margin-bottom: 5px; 
   }
   
-
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* Faculty Class Editor Page */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+.assignmentCornerButton.removeStudent {
+    margin-right: 8px;
+    background-image: url(Elements/RemoveIcon.png);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
 .classesBlock.classEditor {
     width: calc(100vw - 765px);
+    min-width: 300px;
     margin: 48.5px 125px;
-    float: left;
 }
 
 .addClassFormDiv.editor {
     margin: 48.5px 125px;
     position: relative;
+    float: left;
 }
 
 .classBlockItem.classEditor {
     min-height: calc(20% - 1.6px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: none;
+}
+
+.classBlockItem.classEditor:hover {
+    background-color: initial;
+}
+
+.classBlockItemInfo.classEditor {
+    flex: 1;
 }
 
 .classEditorForm {
@@ -795,6 +816,7 @@ label {
 .loginFormButton.classEditor {
     width: 15%;
     height: 35px;
+    min-width: 45px;
     margin-left: 16px;
     border-radius: 10px;
 }
@@ -804,27 +826,122 @@ label {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .addClassFormDiv.assignmentAdder {
-    width: 50%;
+    width: 66.6%;
+    min-width: fit-content;
     position: static;
     margin: 48.5px auto;
 }
 
+.loginForm.assignmentAdder {
+    padding: 0 16px;
+}
+
+.assignmentAdderSubBody {
+    width: 100%;
+    height: calc(100% - 80px);
+    padding: 16px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.assignmentInfoHolder {
+    width: 66.6%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .classDateHolder.assignmentAdder {
-    width: 95%;
+    width: 100%;
 }
 
 .loginFormElement.title {
     flex: 1;
+    padding: 0 2px;
     margin-right: 16px;
 }
 
 .loginFormElement.desc {
-    width: 95%;
-    height: 50%;
+    width: calc(100% - 4px);
+    flex: 1;
+    padding: 0 2px;
+    margin-top: 16px;
+}
+
+.assignmentStudentListHolder {
+    flex: 1;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignmentAdderSubHeader {
+    height: 30px;
+    margin: 5px 0 16px 0;
+    font-size: 20px;
+    color: white;
+}
+
+.assignmentStudentListDiv {
+    width: calc(100%);
+    border-radius: 10px;
+    flex: 1;
+    overflow: auto;
+    background-color: white;
+}
+
+.assignmentStudentDiv {
+    width: 100%;
+    min-width: fit-content;
+    height: calc(20% - 1.6px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.assignmentStudentCheckbox {
+    margin: 0 8px;
+}
+
+.assignmentStudentLabel {
+    margin: 0;
+    white-space: nowrap;
+    color: black;
 }
 
 .loginFormButton.assignmentAdder {
+    width: 160px;
+    margin-bottom: 16px;
+}
+
+/* ~~~~~~~~~~~~~~~~~ */
+/* Assignment Grader */
+/* ~~~~~~~~~~~~~~~~~ */
+
+.classesBlock.assignmentGrader {
     width: 25%;
+    margin: 48.5px auto;
+}
+
+.classBlockItem.assignmentGrader {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginFormElement.assignmentGrader {
+    width: 125px;
+}
+
+.loginFormButton.assignmentGrader {
+    width: 125px;
+    margin: 20px 0;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

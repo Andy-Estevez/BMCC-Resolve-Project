@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo("
                         <a href='adminClass.php?cID=$assignedClass[classID]' class='classLink'>
                             <div class='classBlockItem'>
-                                <h4 class='classBlockItemInfo'><strong>$assignedClass[name]</strong> ($assignedClass[semester], $assignedClass[section])</h4>
+                                <h4 class='classBlockItemInfo'><strong>$assignedClass[name]</strong> ($assignedClass[semester] $assignedClass[year], $assignedClass[section])</h4>
                                 <h4 class='classBlockItemInfo'>Students: $studentCount</h4>
                             </div>
                         </a>

@@ -172,68 +172,6 @@
             ");
         ?>
 
-        <!-- Add Student Form -->
-        <div class="classesBlock classEditor">
-            <!-- View Header -->
-            <div class="classesBlockHead">
-                <h2 class="classesBlockHeader">Class Students</h2>
-            </div>
-
-            <?php
-                // Fetch Class' Students
-                $studentsQuery = "SELECT *
-                                  FROM stutoclassmap AS scMap
-                                  LEFT JOIN students AS s
-                                  ON scMap.studentID = s.studentID
-                                  WHERE scMap.classID = $classID;";
-                
-                $studentsResult = mysqli_query($conn, $studentsQuery);
-                
-                // Verify Query & Results Exist
-                if ($studentsResult && mysqli_num_rows($studentsResult) > 0) {
-                    // Scrollbar Style Fix
-                    if (mysqli_num_rows($studentsResult) > 5)
-                        echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
-                    else
-                        echo("<div class='classesBlockBody'>");
-                
-                    // For Each Student
-                    while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
-                        // Append Student To List
-                        echo("
-                            <div class='classBlockItem classEditor'>
-                                <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> ($assignedStudent[email], UserID: $assignedStudent[studentID])</h4>
-                            </div>
-                            <hr>
-                        ");
-                    }
-                    
-                    echo("</div>");
-                }
-                else {
-                    // Display No Classes Massage
-                    echo("
-                        <div class='classesBlockBody' style='display: flex; align-items: center; justify-content: center;'>
-                            <p class='classBlockItemInfo'>You have not assigned any students to this class.</p>
-                        </div>
-                    ");
-                }
-
-                // Add Student Inputs
-                echo("
-                    <form method='post'>
-                        <div class='classEditorForm'>
-                            <input type='text' name='studentEmail' class='loginFormElement classEditor' placeholder='Enter Student Email'>
-
-                            <input type='hidden' name='formType' value='addStudent'>
-
-                            <input type='submit' value='Add Student' class='loginFormButton classEditor'>
-                        </div>
-                    </form>
-                ")
-            ?>
-        </div>
-
         <!-- Edit Class Form -->
         <?php
             echo("
@@ -266,6 +204,103 @@
                     </form>
                 </div>
             ");
+        ?>
+
+        <!-- Add Student Form -->
+        <div class="classesBlock classEditor">
+            <!-- View Header -->
+            <div class="classesBlockHead">
+                <h2 class="classesBlockHeader">Class Students</h2>
+            </div>
+
+            <?php
+                // Fetch Class' Students
+                $studentsQuery = "SELECT *
+                                  FROM stutoclassmap AS scMap
+                                  LEFT JOIN students AS s
+                                  ON scMap.studentID = s.studentID
+                                  WHERE scMap.classID = $classID;";
+                
+                $studentsResult = mysqli_query($conn, $studentsQuery);
+                
+                // Verify Query & Results Exist
+                if ($studentsResult && mysqli_num_rows($studentsResult) > 0) {
+                    // Scrollbar Style Fix
+                    if (mysqli_num_rows($studentsResult) > 5)
+                        echo("<div class='classesBlockBody' style='border-radius: 15px 0 0 15px'>");
+                    else
+                        echo("<div class='classesBlockBody'>");
+                
+                    // For Each Student
+                    while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
+                        // Append Student To List
+                        echo("
+                            <div class='classBlockItem classEditor'>
+                                <h4 class='classBlockItemInfo classEditor'><strong>$assignedStudent[username]</strong> ($assignedStudent[email], UserID: $assignedStudent[studentID])</h4>
+                                <button class='assignmentCornerButton removeStudent' onclick='location.href=\"removeClassStudentConfirm.php?cID=$classID&sID=$assignedStudent[studentID]\"'></button>
+                            </div>
+                            <hr>
+                        ");
+                    }
+                    
+                    echo("</div>");
+                }
+                else {
+                    // Display No Students Massage
+                    echo("
+                        <div class='classesBlockBody' style='display: flex; align-items: center; justify-content: center;'>
+                            <p class='classBlockItemInfo'>You have not assigned any students to this class.</p>
+                        </div>
+                    ");
+                }
+
+                // Add Student Inputs
+                echo("
+                    <form method='post'>
+                        <div class='classEditorForm'>
+                            <input type='text' name='studentEmail' class='loginFormElement classEditor' placeholder='Enter Student Email'>
+
+                            <input type='hidden' name='formType' value='addStudent'>
+
+                            <input type='submit' value='Add Student' class='loginFormButton classEditor'>
+                        </div>
+                    </form>
+                ")
+            ?>
+        </div>
+
+        <!-- Edit Class Form -->
+        <?php
+            // echo("
+            //     <div class='addClassFormDiv editor'>
+            //         <p class='loginHeader'>Edit Class</p>
+
+            //         <form class='loginForm' method='post'>
+            //             <input type='text' name='className' class='loginFormElement' placeholder='$classInfo[name]' value='$classInfo[name]'>
+            //             <input type='text' name='classSection' class='loginFormElement' placeholder='$classInfo[section]' value='$classInfo[section]'>
+
+            //             <!-- Class Date -->
+            //             <div class='classDateHolder'>
+            //                 <!-- Semester Dropdown Menu -->
+            //                 <select name='classSemester' class='loginFormElement classDateElement' id='classSemester'>
+            //                     <option selected disabled value=''>Pick Semester</option>
+            //                     <option value='Spring'>Spring</option>
+            //                     <option value='Summer'>Summer</option>
+            //                     <option value='Fall'>Fall</option>
+            //                     <option value='Winter'>Winter</option>
+            //                 </select>
+                            
+            //                 <!-- Year Of Class -->
+            //                 <input type='text' name='classYear' class='loginFormElement classDateElement' id='classYear' placeholder='$classInfo[year]' value='$classInfo[year]'>
+            //             </div>
+
+            //             <input type='hidden' name='curSemester' value='$classInfo[semester]'>
+            //             <input type='hidden' name='formType' value='editClass'>
+
+            //             <input type='submit' value='Save Changes' class='loginFormButton'>
+            //         </form>
+            //     </div>
+            // ");
         ?>
 
         <!-- Footer -->

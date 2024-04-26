@@ -108,7 +108,7 @@
                             <div class='assignmentBlockHead'>
                                 <button class='assignmentCornerButton assignmentNotifications' onclick='location.href=\"sendAssignmentReminder.php?aID=$assignment[assignmentID]\"'></button>
                                 <h2 class='classBlockItemInfo'>$assignment[title]</h2>
-                                <button class='assignmentCornerButton assignmentSettings' onclick='location.href=\"facultyEditAssigment.php?aID=$assignment[assignmentID]\"'></button>
+                                <button class='assignmentCornerButton assignmentSettings' onclick='location.href=\"facultyEditAssignment.php?cID=$classID&aID=$assignment[assignmentID]\"'></button>
                             </div>
                             
                             <div class='assignmentBlockBody'>
@@ -154,7 +154,7 @@
 
                     // Submission View Button
                     echo("
-                            <button type='button' class='assignmentButton' onclick='location.href=\"AssignmentSubmissions.php?aID=$assignment[assignmentID]\"'>See Submissions</button>
+                            <button type='button' class='assignmentButton' onclick='location.href=\"AssignmentSubmissions.php?cID=$classID&aID=$assignment[assignmentID]\"'>See Submissions</button>
                         </div>
                     ");
                 }

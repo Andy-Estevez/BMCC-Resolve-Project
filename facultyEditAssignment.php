@@ -4,9 +4,9 @@
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
-<!-- Faculty Assignment Creator Page -->
+<!-- Faculty Assignment Editor Page -->
 
-<?php
+<?php 
     // PHP / Data Set Up
     session_start();
 
@@ -15,58 +15,63 @@
 
     $user_data = check_faculty_login($conn);
     $classID = $_GET["cID"];
+    $assignmentID = $_GET["aID"];
 
     // When Add Assignment Form Is Submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $assignmentTitle = $_POST["assignmentTitle"];
         $assignmentDescription = $_POST["assignmentDescription"];
         $assignmentDueDate = $_POST["assignmentDueDate"];
-        $selectedStudents = $_POST["selectedStudents"];
+        // $selectedStudents = $_POST["selectedStudents"];
+
+        $escapedTitle = str_replace(["'", '"'], ["\'", '\"'], $assignmentTitle);
+        $escapedDescription = str_replace(["'", '"'], ["\'", '\"'], $assignmentDescription);
 
         // Verify Inputs Not Empty
         if (!empty($assignmentTitle) && !empty($assignmentDescription) && !empty($assignmentDueDate)) {
-            // Create New Assignment Entry
-            $query = "INSERT INTO assignments (assignments.facultyID, assignments.classID, assignments.title, assignments.description, assignments.dueDate)
-                      VALUES ('$user_data[facultyID]', '$classID', '$assignmentTitle', '$assignmentDescription', '$assignmentDueDate');";
+            // Update Assignment Entry
+            $query = "UPDATE assignments AS a
+                      SET a.title = '$escapedTitle', a.description = '$escapedDescription', a.dueDate = '$assignmentDueDate'
+                      WHERE a.assignmentID = $assignmentID;";
 
             // Verify Query Successful
             if (mysqli_query($conn, $query)) {
                 // If Students Were Selected
-                if (isset($selectedStudents)) {
-                    // Fetch Assignment ID
-                    $assignmentIDQuery = "SELECT assignmentID
-                                          FROM assignments AS a
-                                          WHERE a.classID = $classID AND a.title = '$assignmentTitle'
-                                          AND a.description = '$assignmentDescription' AND a.dueDate = '$assignmentDueDate';";
+                // if (isset($selectedStudents)) {
+                //     // Fetch Assignment ID
+                //     $assignmentIDQuery = "SELECT assignmentID
+                //                           FROM assignments AS a
+                //                           WHERE a.classID = $classID AND a.title = '$assignmentTitle'
+                //                           AND a.description = '$assignmentDescription' AND a.dueDate = '$assignmentDueDate';";
     
-                    $assignmentIDResult = mysqli_query($conn, $assignmentIDQuery);
+                //     $assignmentIDResult = mysqli_query($conn, $assignmentIDQuery);
 
-                    if (!$assignmentIDResult) {
-                        die("ERROR: Could not acquire assignment ID.");
-                    }
+                //     if (!$assignmentIDResult) {
+                //         die("ERROR: Could not acquire assignment ID.");
+                //     }
 
-                    $assignmentID = mysqli_fetch_assoc($assignmentIDResult)["assignmentID"];
+                //     $assignmentID = mysqli_fetch_assoc($assignmentIDResult)["assignmentID"];
 
-                    // For Each Selected Student
-                    foreach ($selectedStudents as $studentID) {
-                        $assignQuery = "INSERT INTO stutoassignmentmap (stutoassignmentmap.studentID, stutoassignmentmap.assignmentID,
-                                                                        stutoassignmentmap.classID, stutoassignmentmap.completionStatus)
-                                        VALUES ('$studentID', '$assignmentID', '$classID', '0');";
+                //     // For Each Selected Student
+                //     foreach ($selectedStudents as $studentID) {
+                //         $assignQuery = "INSERT INTO stutoassignmentmap (stutoassignmentmap.studentID, stutoassignmentmap.assignmentID,
+                //                                                         stutoassignmentmap.classID, stutoassignmentmap.completionStatus)
+                //                         VALUES ('$studentID', '$assignmentID', '$classID', '0');";
 
-                        // Assign Student To Assignment
-                        $assignResult = mysqli_query($conn, $assignQuery);
+                //         // Assign Student To Assignment
+                //         $assignResult = mysqli_query($conn, $assignQuery);
 
-                        if (!$assignResult) {
-                            die("ERROR: Failed to assign student to assignment.");
-                        }
-                    }
-                }
-                else {
-                    // Handle No Selected Students Here
-                }
+                //         if (!$assignResult) {
+                //             die("ERROR: Failed to assign student to assignment.");
+                //         }
+                //     }
+                // }
+                // else {
+                //     // Handle No Selected Students Here
+                // }
             } 
             else {
-                die("ERROR: Assignment creation failed.");
+                die("ERROR: Assignment edition failed.");
             }
         }
     }
@@ -137,22 +142,35 @@
                     </p>
                 </div>
             ");
+
+            // Fetch Assignment Info
+            $assignmentQuery = "SELECT *
+                                FROM assignments AS a
+                                WHERE a.assignmentID = $assignmentID;";
+
+            $assignmentResult = mysqli_query($conn, $assignmentQuery);
+
+            // Verify Query
+            if (!$assignmentResult)
+                die("ERROR: Could not acquire assigment data for assignment with ID " + $assignmentID);
+
+            $assignmentInfo = mysqli_fetch_assoc($assignmentResult);
         ?>
 
-        <!-- Add Assignment Form -->
+        <!-- Edit Assignment Form -->
         <div class="addClassFormDiv assignmentAdder">
-            <p class="loginHeader">Add Assignment</p>
+            <p class="loginHeader">Edit Assignment</p>
 
             <form class="loginForm assignmentAdder" method="post">
                 <div class="assignmentAdderSubBody">
                     <!-- Assignment Information -->
                     <div class="assignmentInfoHolder">
                         <div class="classDateHolder assignmentAdder">
-                            <input type="text" name="assignmentTitle" class="loginFormElement title" placeholder="Enter Assignment Title">
-                            <input type="datetime-local" name="assignmentDueDate" class="loginFormElement">
+                            <input type="text" name="assignmentTitle" class="loginFormElement title" value="<?php echo($assignmentInfo['title']); ?>" placeholder="Enter Assignment Title">
+                            <input type="datetime-local" name="assignmentDueDate" class="loginFormElement" value="<?php echo($assignmentInfo['dueDate']); ?>">
                         </div>
         
-                        <input type="text" name="assignmentDescription" class="loginFormElement desc" placeholder="Enter Assignment Description">
+                        <input type="text" name="assignmentDescription" class="loginFormElement desc" value="<?php echo($assignmentInfo['description']); ?>" placeholder="Enter Assignment Description">
                     </div>
 
                     <!-- Student List -->
@@ -197,7 +215,7 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Create Assignment" class="loginFormButton assignmentAdder">
+                <input type="submit" value="Save Changes" class="loginFormButton assignmentAdder">
             </form>
         </div>
 
