@@ -21,7 +21,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Faculty Student Viewer</title>
+        <title>BMCC Resolve | Faculty | Student Viewer</title>
     </head>
 
     <body>
@@ -38,6 +38,6 @@
             </div>
         </nav>
 
-        <h3 style="text-align: center;">Under Construction</h3>
+        <h3 style="text-align: center;">Under Construction (Faculty's Student Viewer)</h3>
     </body>
 </html>

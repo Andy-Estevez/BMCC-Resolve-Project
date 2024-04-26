@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BMCC Resolve | Faculty Console</title>
+  <title>BMCC Resolve | Faculty | Home</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>

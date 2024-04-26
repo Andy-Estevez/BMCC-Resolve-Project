@@ -2,7 +2,7 @@
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
-<!-- Log Out Handler Page -->
+<!-- Log Out Handler -->
 
 <?php
     // PHP / Data Set Up

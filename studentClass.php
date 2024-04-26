@@ -4,7 +4,7 @@
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
-<!-- Student Class Page -->
+<!-- Student Class Viewer Page -->
 
 <?php
     // PHP / Data Set Up
@@ -22,7 +22,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Class Viewer</title>
+        <title>BMCC Resolve | Student | Class Viewer</title>
     </head>
 
     <body>

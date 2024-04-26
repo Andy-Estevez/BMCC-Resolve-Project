@@ -14,7 +14,6 @@
     include("functions.php");
 
     $user_data = check_faculty_login($conn);
-
     $classID = $_GET["cID"];
     $studentID = $_GET["sID"];
 ?>
@@ -24,7 +23,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Student Removal Confirmation</title>
+        <title>BMCC Resolve | Faculty | Student Removal Confirmation</title>
     </head>
 
     <body>

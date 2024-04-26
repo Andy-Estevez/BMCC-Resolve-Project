@@ -4,7 +4,7 @@
 <!-- BMCC Tech Innovation Hub Internship -->
 <!-- Spring Semester 2024 -->
 <!-- BMCC Resolve Project -->
-<!-- Faculty Class Page -->
+<!-- Faculty Assignment Submissions Page -->
 
 <?php
     // PHP / Data Set Up
@@ -46,7 +46,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Assignment Submissions</title>
+        <title>BMCC Resolve | Faculty | Assignment Submissions Viewer</title>
     </head>
 
     <body>

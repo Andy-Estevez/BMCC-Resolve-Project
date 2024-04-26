@@ -15,7 +15,7 @@
     $classID = $_GET["cID"];
     $studentID = $_GET["sID"];
 
-    // Remove Student From Class
+    // Remove Student From Class Query
     $removeQuery = "DELETE FROM stutoclassmap
                     WHERE classID = $classID AND studentID = $studentID;";
 

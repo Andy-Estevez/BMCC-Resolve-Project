@@ -12,8 +12,8 @@
     include("functions.php");
 
     $user_data = check_student_login($conn);
-    $assignmentID = $_GET["aID"];
     $classID = $_GET["cID"];
+    $assignmentID = $_GET["aID"];
 
     // Update Assignment Status
     $updateQuery = "UPDATE stutoassignmentmap 

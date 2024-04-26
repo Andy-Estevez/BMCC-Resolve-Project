@@ -14,10 +14,9 @@
     include("functions.php");
 
     $user_data = check_student_login($conn);
-
+    $classID = $_GET["cID"];
+    $assignmentID = $_GET["aID"];
     $assignmentTitle = urldecode($_GET["aT"]);
-    $assignmentID = urldecode($_GET["aID"]);
-    $classID = urldecode($_GET["cID"]);
 ?>
 
 <html lang="en">
@@ -25,7 +24,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Assignment Submission Confirmation</title>
+        <title>BMCC Resolve | Student | Assignment Submission Confirmation</title>
     </head>
 
     <body>

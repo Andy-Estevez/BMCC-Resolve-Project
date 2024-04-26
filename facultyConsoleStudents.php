@@ -49,7 +49,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Faculty Console</title>
+        <title>BMCC Resolve | Faculty | Console</title>
     </head>
 
     <body>

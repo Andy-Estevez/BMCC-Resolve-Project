@@ -22,7 +22,7 @@
         // Verify Inputs Not Empty
         if (!empty($email) && !empty($password)) {
             // Check For Admin Log In
-            $query = "select * from admins where email = '$email' limit 1";
+            $query = "select * from admins where email = '$email' limit 1";  
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
