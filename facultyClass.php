@@ -76,7 +76,10 @@
             // Display Class Info Banner
             echo("
                 <div class='classInfo'>
-                    <button class='assignmentCornerButton classAnnouncements' onclick='location.href=\"sendClassAnnouncement.php?cID=$classID\"'></button>
+                    <!-- Class Announcements Button -->
+                    <button class='assignmentCornerButton classAnnouncements' onclick='location.href=\"facultyClassAnnouncements.php?cID=$classID\"'></button>
+                    
+                    <!-- Class Information -->
                     <p class='classesBlockHeader'>
                         <strong>Class</strong>: $classInfo[name] // 
                         <strong>Section</strong>: $classInfo[section] // 
@@ -84,13 +87,16 @@
                         <strong>Year</strong>: $classInfo[year] // 
                         <strong>Students</strong>: $studentCount[count]
                     </p>
+
+                    <!-- Class Settings Button -->
                     <button class='assignmentCornerButton classSettings' onclick='location.href=\"facultyEditClass.php?cID=$classID\"'></button>
                 </div>
             ");
 
+            // Assignment Creator Button
             echo("<button class='createAssignmentButton' onclick='location.href=\"createAssignment.php?cID=$classID\"'>Create Assignment</button>");
 
-            // Fetch Assignments
+            // Fetch Class' Assignments Query
             $assignmentsQuery = "SELECT *
                                  FROM assignments AS a
                                  WHERE a.classID = $classID
@@ -106,8 +112,12 @@
                     echo("
                         <div class='assignmentBlock'>
                             <div class='assignmentBlockHead'>
-                                <button class='assignmentCornerButton assignmentNotifications' onclick='location.href=\"sendAssignmentReminder.php?aID=$assignment[assignmentID]\"'></button>
+                                <!-- Assignment Reminder Button -->
+                                <button class='assignmentCornerButton assignmentNotifications' onclick='location.href=\"facultyAssignmentReminder.php?cID=$classID&aID=$assignment[assignmentID]\"'></button>
+                                
                                 <h2 class='classBlockItemInfo'>$assignment[title]</h2>
+
+                                <!-- Assignment Editor Button -->
                                 <button class='assignmentCornerButton assignmentSettings' onclick='location.href=\"facultyEditAssignment.php?cID=$classID&aID=$assignment[assignmentID]\"'></button>
                             </div>
                             
@@ -150,10 +160,8 @@
                                 <p class='assignmentText'><strong>Students</strong>: $assignmentStudentCount[count]</p>
                                 <p class='assignmentText'><strong>Pending Submissions</strong>: $pendingSubmissionCount[count]</p>
                             </div>
-                    ");
 
-                    // Submission View Button
-                    echo("
+                            <!-- Submission Viewer Button -->
                             <button type='button' class='assignmentButton' onclick='location.href=\"AssignmentSubmissions.php?cID=$classID&aID=$assignment[assignmentID]\"'>See Submissions</button>
                         </div>
                     ");
