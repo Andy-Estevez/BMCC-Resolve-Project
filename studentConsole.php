@@ -58,12 +58,12 @@
             <?php
                 // Fetch Student's Classes
                 $classesQuery = "SELECT * 
-                                 FROM stutoclassmap AS scMap
+                                 FROM stutoclassmap AS stcMap
                                  LEFT JOIN classes AS c
-                                 ON scMap.classID = c.classID 
+                                 ON stcMap.classID = c.classID 
                                  LEFT JOIN faculty AS f
                                  ON c.facultyID = f.facultyID 
-                                 WHERE $user_data[studentID] = scMap.studentID 
+                                 WHERE $user_data[studentID] = stcMap.studentID 
                                  ORDER BY c.year DESC, c.semester ASC;";
 
                 $classesResult = mysqli_query($conn, $classesQuery);

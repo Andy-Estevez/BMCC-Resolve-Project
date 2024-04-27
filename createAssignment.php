@@ -114,8 +114,8 @@
 
             // Fetch Class' Student Count
             $studentCountQuery = "SELECT COUNT(*) AS count
-                                  FROM stuToClassMap AS scMap
-                                  WHERE scMap.classID = $classID";
+                                  FROM stutoclassmap AS stcMap
+                                  WHERE stcMap.classID = $classID";
 
             $studentCountResult = mysqli_query($conn, $studentCountQuery);
 
@@ -163,10 +163,10 @@
                             <?php
                                 // Fetch Class' Students
                                 $studentsQuery = "SELECT *
-                                                  FROM stutoclassmap AS scMap
+                                                  FROM stutoclassmap AS stcMap
                                                   LEFT JOIN students AS s
-                                                  ON scMap.studentID = s.studentID
-                                                  WHERE scMap.classID = $classID;";
+                                                  ON stcMap.studentID = s.studentID
+                                                  WHERE stcMap.classID = $classID;";
                                 
                                 $studentsResult = mysqli_query($conn, $studentsQuery);
 

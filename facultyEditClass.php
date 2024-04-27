@@ -68,8 +68,8 @@
 
                     // Check For Duplicates Within StuToClassMap
                     $query = "SELECT *
-                              FROM stutoclassmap AS scMap
-                              WHERE scMap.studentID = $studentID[studentID];";
+                              FROM stutoclassmap AS stcMap
+                              WHERE stcMap.studentID = $studentID[studentID];";
 
                     $result = mysqli_query($conn, $query);
 
@@ -147,8 +147,8 @@
 
             // Fetch Class' Student Count
             $studentCountQuery = "SELECT COUNT(*) AS count
-                                  FROM stuToClassMap AS scMap
-                                  WHERE scMap.classID = $classID";
+                                  FROM stutoclassmap AS stcMap
+                                  WHERE stcMap.classID = $classID";
 
             $studentCountResult = mysqli_query($conn, $studentCountQuery);
 
@@ -216,10 +216,10 @@
             <?php
                 // Fetch Class' Students
                 $studentsQuery = "SELECT *
-                                  FROM stutoclassmap AS scMap
+                                  FROM stutoclassmap AS stcMap
                                   LEFT JOIN students AS s
-                                  ON scMap.studentID = s.studentID
-                                  WHERE scMap.classID = $classID;";
+                                  ON stcMap.studentID = s.studentID
+                                  WHERE stcMap.classID = $classID;";
                 
                 $studentsResult = mysqli_query($conn, $studentsQuery);
                 
@@ -268,40 +268,6 @@
                 ")
             ?>
         </div>
-
-        <!-- Edit Class Form -->
-        <?php
-            // echo("
-            //     <div class='addClassFormDiv editor'>
-            //         <p class='loginHeader'>Edit Class</p>
-
-            //         <form class='loginForm' method='post'>
-            //             <input type='text' name='className' class='loginFormElement' placeholder='$classInfo[name]' value='$classInfo[name]'>
-            //             <input type='text' name='classSection' class='loginFormElement' placeholder='$classInfo[section]' value='$classInfo[section]'>
-
-            //             <!-- Class Date -->
-            //             <div class='classDateHolder'>
-            //                 <!-- Semester Dropdown Menu -->
-            //                 <select name='classSemester' class='loginFormElement classDateElement' id='classSemester'>
-            //                     <option selected disabled value=''>Pick Semester</option>
-            //                     <option value='Spring'>Spring</option>
-            //                     <option value='Summer'>Summer</option>
-            //                     <option value='Fall'>Fall</option>
-            //                     <option value='Winter'>Winter</option>
-            //                 </select>
-                            
-            //                 <!-- Year Of Class -->
-            //                 <input type='text' name='classYear' class='loginFormElement classDateElement' id='classYear' placeholder='$classInfo[year]' value='$classInfo[year]'>
-            //             </div>
-
-            //             <input type='hidden' name='curSemester' value='$classInfo[semester]'>
-            //             <input type='hidden' name='formType' value='editClass'>
-
-            //             <input type='submit' value='Save Changes' class='loginFormButton'>
-            //         </form>
-            //     </div>
-            // ");
-        ?>
 
         <!-- Footer -->
         <footer>

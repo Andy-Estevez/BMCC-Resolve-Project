@@ -27,7 +27,7 @@
             $classSemester = $_POST["classSemester"];
 
             // Create New Class Entry
-            $query = "INSERT INTO Classes (Classes.facultyID, Classes.name, Classes.section, Classes.semester, Classes.year)
+            $query = "INSERT INTO classes (classes.facultyID, classes.name, classes.section, classes.semester, classes.year)
                       VALUES ('$user_data[facultyID]', '$className', '$classSection', '$classSemester', '$classYear')";
 
             // Verify Query Successful
@@ -93,9 +93,9 @@
                 // Fetch Num. Of Students In Faculty's Classes
                 $studentsQuery = "SELECT DISTINCT s.*
                                   FROM students AS s
-                                  LEFT JOIN stutoclassmap AS scMap
-                                  ON scMap.studentID = s.studentID
-                                  WHERE scMap.classID IN ($classesQuery);";
+                                  LEFT JOIN stutoclassmap AS stcMap
+                                  ON stcMap.studentID = s.studentID
+                                  WHERE stcMap.classID IN ($classesQuery);";
 
                 $studentsResult = mysqli_query($conn, $studentsQuery);
 
@@ -111,9 +111,9 @@
                     while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
                         // Fetch Num. Of Faculty's Classes Student Is In
                         $classCountQuery = "SELECT COUNT(*) AS count
-                                            FROM stuToClassMap AS scMap
-                                            WHERE scMap.studentID = $assignedStudent[studentID]
-                                            AND scMap.classID IN ($classesQuery);";
+                                            FROM stutoclassmap AS stcMap
+                                            WHERE stcMap.studentID = $assignedStudent[studentID]
+                                            AND stcMap.classID IN ($classesQuery);";
 
                         $classCountResult = mysqli_query($conn, $classCountQuery);
 

@@ -27,7 +27,7 @@
             $classSemester = $_POST["classSemester"];
 
             // Create New Class Entry
-            $query = "INSERT INTO Classes (Classes.facultyID, Classes.name, Classes.section, Classes.semester, Classes.year)
+            $query = "INSERT INTO classes (classes.facultyID, classes.name, classes.section, classes.semester, classes.year)
                       VALUES ('$user_data[facultyID]', '$className', '$classSection', '$classSemester', '$classYear')";
 
             // Verify Query Successful
@@ -105,8 +105,8 @@
                     while ($assignedClass = mysqli_fetch_assoc($classesResult)) {
                         // Fetch Class' Student Count
                         $studentCountQuery = "SELECT COUNT(*) AS count
-                                              FROM stuToClassMap AS scMap
-                                              WHERE scMap.classID = $assignedClass[classID]";
+                                              FROM stutoclassmap AS stcMap
+                                              WHERE stcMap.classID = $assignedClass[classID]";
 
                         $studentCountResult = mysqli_query($conn, $studentCountQuery);
 

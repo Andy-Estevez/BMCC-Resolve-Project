@@ -62,8 +62,8 @@
 
             // Fetch Class' Student Count
             $studentCountQuery = "SELECT COUNT(*) AS count
-                                  FROM stuToClassMap AS scMap
-                                  WHERE scMap.classID = $classID";
+                                  FROM stutoclassmap AS stcMap
+                                  WHERE stcMap.classID = $classID";
 
             $studentCountResult = mysqli_query($conn, $studentCountQuery);
 
@@ -130,8 +130,8 @@
 
                     // Fetch Assignment's Student Count
                     $assignmentStudentCountQuery = "SELECT COUNT(*) AS count
-                                                    FROM stuToAssignmentMap AS saMap
-                                                    WHERE saMap.assignmentID = $assignment[assignmentID]";
+                                                    FROM stutoassignmentmap AS staMap
+                                                    WHERE staMap.assignmentID = $assignment[assignmentID]";
 
                     $assignmentStudentCountResult = mysqli_query($conn, $assignmentStudentCountQuery);
 
@@ -143,9 +143,9 @@
 
                     // Fetch Assignment's Pending Submission Count
                     $pendingSubmissionCountQuery = "SELECT COUNT(*) as count
-                                                    FROM stuToAssignmentMap AS saMap
-                                                    WHERE saMap.assignmentID = $assignment[assignmentID]
-                                                    AND saMap.completionStatus = 1";
+                                                    FROM stutoassignmentmap AS staMap
+                                                    WHERE staMap.assignmentID = $assignment[assignmentID]
+                                                    AND staMap.completionStatus = 1";
 
                     $pendingSubmissionCountResult = mysqli_query($conn, $pendingSubmissionCountQuery);
 

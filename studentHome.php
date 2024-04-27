@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Student homepage</title>
+    <title>BMCC Resolve | Student | Home</title>
 </head>
 <body>
      <!-- Header / Navigation Bar -->
      <nav>
         <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-            <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+            <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
         </a>
         <div class="NavButtonsContainer">
             <button type="button" class="navButton" onclick="location.href='studentHome.php'">Home</button>

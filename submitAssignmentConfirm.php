@@ -44,12 +44,12 @@
         <?php 
             // Fetch Class & Faculty Info
             $classQuery = "SELECT * 
-                            FROM classes AS c
-                            LEFT JOIN stutoclassmap as scMap
-                            ON $user_data[studentID] = scMap.studentID
-                            LEFT JOIN faculty AS f
-                            ON c.facultyID = f.facultyID
-                            WHERE $classID = c.classID";
+                           FROM classes AS c
+                           LEFT JOIN stutoclassmap as stcMap
+                           ON $user_data[studentID] = stcMap.studentID
+                           LEFT JOIN faculty AS f
+                           ON c.facultyID = f.facultyID
+                           WHERE $classID = c.classID";
 
             $classResult = mysqli_query($conn, $classQuery);
             

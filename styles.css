@@ -204,7 +204,7 @@ footer.abs {
 /* ~~~~~~~~~~~~~~~~~~~~~~ */
 
 .loginBody {
-    background-image: url('Elements/BMCC-logo-no-type-gray.png');
+    background-image: url('Elements/bmcc-logo-no-type-gray.png');
     background-size: 100px;
     animation: animate-loginBody-bg 5s infinite linear;
 }
