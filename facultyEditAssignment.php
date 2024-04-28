@@ -175,7 +175,7 @@
 
                     <!-- Student List -->
                     <div class="assignmentStudentListHolder">
-                        <p class="assignmentAdderSubHeader">Select Students</p>
+                        <p class="assignmentAdderSubHeader">Selected Students</p>
 
                         <div class="assignmentStudentListDiv">
                             <?php

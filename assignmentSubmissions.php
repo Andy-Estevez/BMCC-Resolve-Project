@@ -46,7 +46,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title>BMCC Resolve | Faculty | Assignment Submissions Viewer</title>
+        <title>BMCC Resolve | Faculty | Assignment Grader</title>
     </head>
 
     <body>
@@ -123,60 +123,168 @@
             echo("<h3 style='text-align: center; height: 25px; margin: 10px 0;'>$assignmentTitle</h3>");
         ?>
 
-        <!-- Submission List -->
-        <div class="classesBlock assignmentGrader">
-            <!-- Header -->
-            <div class="classesBlockHead">
-                <h2 class="classesBlockHeader">Submissions</h2>
+        <!-- Forms -->
+        <div class="assignmentGraderBodyDiv">
+            <!-- Unsubmitted List -->
+            <div class="classesBlock assignmentGrader">
+                <!-- Header -->
+                <div class="classesBlockHead">
+                    <h2 class="classesBlockHeader">Unsubmitted</h2>
+                </div>
+    
+                <!-- Body -->
+                <div class="classesBlockBody">
+                    <?php
+                        // Fetch Student Entries
+                        $submissionQuery = "SELECT *
+                                            FROM stutoassignmentmap AS staMap
+                                            WHERE staMap.assignmentID = $assignmentID AND staMap.completionStatus = 0;";
+    
+                        $submissionResult = mysqli_query($conn, $submissionQuery);
+    
+                        // Verify Query & Results Exist
+                        if ($submissionResult && mysqli_num_rows($submissionResult) > 0) {
+                            // For Each Submission
+                            while ($submission = mysqli_fetch_assoc($submissionResult)) {
+                                // Fetch Student Info
+                                $studentInfoQuery = "SELECT *
+                                                     FROM students AS s
+                                                     WHERE s.studentID = $submission[studentID];";
+    
+                                $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
+    
+                                if (!$studentInfoResult) {
+                                    die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+                                }
+    
+                                $student = mysqli_fetch_assoc($studentInfoResult);
+    
+                                // Append Submission To List
+                                echo("
+                                    <div class='classBlockItem assignmentGrader unsubmitted'>
+                                        <h4 class='classBlockItemInfo'><strong>$student[username]</strong> ($student[studentID])</h4>
+                                    </div>
+                                    <hr>
+                                ");
+                            }
+    
+                        }
+                        else {
+                            // Handle No Submissions Here
+                            echo("<h4 style='position: relative; top: 45%; left: 50%; transform: translate(-50%, 0); margin: 0 10px; color: white;'>No pending students at this time.</h4>");
+                        }
+                    ?>
+                </div>
             </div>
 
-            <!-- Body -->
-            <div class="classesBlockBody">
-                <?php
-                    // Fetch Submissions
-                    $submissionQuery = "SELECT *
-                                        FROM stutoassignmentmap AS staMap
-                                        WHERE staMap.assignmentID = $assignmentID AND staMap.completionStatus = 1;";
-
-                    $submissionResult = mysqli_query($conn, $submissionQuery);
-
-                    // Verify Query & Results Exist
-                    if ($submissionResult && mysqli_num_rows($submissionResult) > 0) {
-                        // For Each Submission
-                        while ($submission = mysqli_fetch_assoc($submissionResult)) {
-                            // Fetch Student Info
-                            $studentInfoQuery = "SELECT *
-                                                 FROM students AS s
-                                                 WHERE s.studentID = $submission[studentID];";
-
-                            $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
-
-                            if (!$studentInfoResult) {
-                                die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+            <!-- Submitted List -->
+            <div class="classesBlock assignmentGrader">
+                <!-- Header -->
+                <div class="classesBlockHead">
+                    <h2 class="classesBlockHeader">Submitted</h2>
+                </div>
+    
+                <!-- Body -->
+                <div class="classesBlockBody">
+                    <?php
+                        // Fetch Submissions
+                        $submissionQuery = "SELECT *
+                                            FROM stutoassignmentmap AS staMap
+                                            WHERE staMap.assignmentID = $assignmentID AND staMap.completionStatus = 1;";
+    
+                        $submissionResult = mysqli_query($conn, $submissionQuery);
+    
+                        // Verify Query & Results Exist
+                        if ($submissionResult && mysqli_num_rows($submissionResult) > 0) {
+                            // For Each Submission
+                            while ($submission = mysqli_fetch_assoc($submissionResult)) {
+                                // Fetch Student Info
+                                $studentInfoQuery = "SELECT *
+                                                     FROM students AS s
+                                                     WHERE s.studentID = $submission[studentID];";
+    
+                                $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
+    
+                                if (!$studentInfoResult) {
+                                    die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+                                }
+    
+                                $student = mysqli_fetch_assoc($studentInfoResult);
+    
+                                // Append Submission To List
+                                echo("
+                                    <div class='classBlockItem assignmentGrader'>
+                                        <h4 class='classBlockItemInfo'><strong>$student[username]</strong> ($student[studentID])</h4>
+                                        <form method='post' style='display: flex; flex-direction: column; align-items: center;'>
+                                            <input type='hidden' name='studentID' value='$student[studentID]'>
+                                            <input type='text' name='grade' class='loginFormElement assignmentGrader' placeholder='Enter Grade'>
+                                            <input type='submit' value='Assign Grade' class='loginFormButton assignmentGrader'>
+                                        </form>
+                                    </div>
+                                    <hr>
+                                ");
                             }
-
-                            $student = mysqli_fetch_assoc($studentInfoResult);
-
-                            // Append Submission To List
-                            echo("
-                                <div class='classBlockItem assignmentGrader'>
-                                    <h4 class='classBlockItemInfo'><strong>$student[username]</strong> ($student[studentID])</h4>
-                                    <form method='post' style='display: flex; flex-direction: column; align-items: center;'>
-                                        <input type='hidden' name='studentID' value='$student[studentID]'>
-                                        <input type='text' name='grade' class='loginFormElement assignmentGrader' placeholder='Enter Grade'>
-                                        <input type='submit' value='Assign Grade' class='loginFormButton assignmentGrader'>
-                                    </form>
-                                </div>
-                                <hr>
-                            ");
+    
                         }
+                        else {
+                            // Handle No Submissions Here
+                            echo("<h4 style='position: relative; top: 45%; left: 50%; transform: translate(-50%, 0); margin: 0 10px; color: white;'>No submissions at this time.</h4>");
+                        }
+                    ?>
+                </div>
+            </div>
 
-                    }
-                    else {
-                        // Handle No Submissions Here
-                        echo("<h4 style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, 0); color: white;'>There are no submissions at this time.</h4>");
-                    }
-                ?>
+            <!-- Graded List -->
+            <div class="classesBlock assignmentGrader">
+                <!-- Header -->
+                <div class="classesBlockHead">
+                    <h2 class="classesBlockHeader">Graded</h2>
+                </div>
+    
+                <!-- Body -->
+                <div class="classesBlockBody">
+                    <?php
+                        // Fetch Submissions
+                        $submissionQuery = "SELECT *
+                                            FROM stutoassignmentmap AS staMap
+                                            WHERE staMap.assignmentID = $assignmentID AND staMap.completionStatus = 2;";
+    
+                        $submissionResult = mysqli_query($conn, $submissionQuery);
+    
+                        // Verify Query & Results Exist
+                        if ($submissionResult && mysqli_num_rows($submissionResult) > 0) {
+                            // For Each Submission
+                            while ($submission = mysqli_fetch_assoc($submissionResult)) {
+                                // Fetch Student Info
+                                $studentInfoQuery = "SELECT *
+                                                     FROM students AS s
+                                                     WHERE s.studentID = $submission[studentID];";
+    
+                                $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
+    
+                                if (!$studentInfoResult) {
+                                    die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+                                }
+    
+                                $student = mysqli_fetch_assoc($studentInfoResult);
+    
+                                // Append Submission To List
+                                echo("
+                                    <div class='classBlockItem assignmentGrader graded'>
+                                        <h4 class='classBlockItemInfo'><strong>$student[username]</strong> ($student[studentID])</h4>
+                                        <h4 class='classBlockItemInfo'><strong>Grade: </strong> ($submission[grade])</h4>
+                                    </div>
+                                    <hr>
+                                ");
+                            }
+    
+                        }
+                        else {
+                            // Handle No Submissions Here
+                            echo("<h4 style='position: relative; top: 45%; left: 50%; transform: translate(-50%, 0); margin: 0 10px; color: white;'>No available grades at this time.</h4>");
+                        }
+                    ?>
+                </div>
             </div>
         </div>
 
