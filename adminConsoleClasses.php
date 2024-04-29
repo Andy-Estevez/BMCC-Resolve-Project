@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <body>
     <nav>
             <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='adminHome.php'">Home</button>
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 while ($assignedClass = mysqli_fetch_assoc($classesResult)) {
                     $studentCountQuery = "SELECT COUNT(*) AS count
-                                        FROM stuToClassMap
+                                        FROM stutoclassmap
                                         WHERE classID = $assignedClass[classID]";
 
                     $studentCountResult = mysqli_query($conn, $studentCountQuery);

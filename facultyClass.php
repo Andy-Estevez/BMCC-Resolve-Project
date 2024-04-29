@@ -162,7 +162,7 @@
                             </div>
 
                             <!-- Submission Viewer Button -->
-                            <button type='button' class='assignmentButton' onclick='location.href=\"AssignmentSubmissions.php?cID=$classID&aID=$assignment[assignmentID]\"'>See Submissions</button>
+                            <button type='button' class='assignmentButton' onclick='location.href=\"assignmentSubmissions.php?cID=$classID&aID=$assignment[assignmentID]\"'>See Submissions</button>
                         </div>
                     ");
                 }

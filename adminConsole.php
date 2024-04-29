@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Header / Navigation Bar -->
 <nav>
             <a href="https://www.bmcc.cuny.edu" target="_blank" onclick="return confirm('This will take you to the main BMCC page')">
-                <img class="BMCCLogo" src="Elements\bmcc-logo-two-line-wide-WHITE.png" alt="BMCC Logo" height="50px">
+                <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
             </a>
             <div class="NavButtonsContainer">
                 <button type="button" class="navButton" onclick="location.href='adminHome.php'">Home</button>
@@ -78,9 +78,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $studentsQuery = "SELECT DISTINCT s.*
                                   FROM students AS s
-                                  LEFT JOIN stutoclassmap AS scMap
-                                  ON scMap.studentID = s.studentID
-                                  WHERE scMap.classID IN ($classesQuery);";
+                                  LEFT JOIN stutoclassmap AS stcMap
+                                  ON stcMap.studentID = s.studentID
+                                  WHERE stcMap.classID IN ($classesQuery);";
 
                 $studentsResult = mysqli_query($conn, $studentsQuery);
 
@@ -92,9 +92,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     while ($assignedStudent = mysqli_fetch_assoc($studentsResult)) {
                         $classCountQuery = "SELECT COUNT(*) AS count
-                                            FROM stuToClassMap AS scMap
-                                            WHERE scMap.studentID = $assignedStudent[studentID]
-                                            AND scMap.classID IN ($classesQuery);";
+                                            FROM stutoclassmap AS stcMap
+                                            WHERE stcMap.studentID = $assignedStudent[studentID]
+                                            AND stcMap.classID IN ($classesQuery);";
 
                         $classCountResult = mysqli_query($conn, $classCountQuery);
 
