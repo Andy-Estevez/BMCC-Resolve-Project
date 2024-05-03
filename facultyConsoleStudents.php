@@ -90,7 +90,7 @@
                                  FROM classes AS c
                                  WHERE c.facultyID = $user_data[facultyID]";
 
-                // Fetch Num. Of Students In Faculty's Classes
+                // Fetch Students In Faculty's Classes
                 $studentsQuery = "SELECT DISTINCT s.*
                                   FROM students AS s
                                   LEFT JOIN stutoclassmap AS stcMap

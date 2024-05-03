@@ -35,7 +35,7 @@
                 // Update Class Entry
                 $query = "UPDATE classes AS c
                           SET c.name = '$className', c.section = '$classSection', c.semester = '$classSemester', c.year = '$classYear'
-                          WHERE c.classID = $classID";
+                          WHERE c.classID = $classID;";
 
                 // Verify Query Successful
                 if (mysqli_query($conn, $query)) {
@@ -69,7 +69,8 @@
                     // Check For Duplicates Within StuToClassMap
                     $query = "SELECT *
                               FROM stutoclassmap AS stcMap
-                              WHERE stcMap.studentID = $studentID[studentID];";
+                              WHERE stcMap.studentID = $studentID[studentID]
+                              AND stcMap.classID = $classID;";
 
                     $result = mysqli_query($conn, $query);
 
