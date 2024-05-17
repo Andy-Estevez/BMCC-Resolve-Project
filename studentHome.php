@@ -35,7 +35,7 @@
 
   <div class="container">
   <div class="flex-item-1">
-    <h2 id="welcome-title"> Inc grade info</h2>
+    <h2 id="welcome-title">Student Homepage</h2>
     <p>Term’s work incomplete. Instructor has reasonable expectation that the student can receive a passing grade after completing the missing assignment(s) and agrees to work with the student to make up the missing work. Student must also agree with the faculty to make the missing work before the INC deadline which is published on BMCC Academic Calendar on the web. The “INC” grade reverts to an “FIN” if a change is not made by deadline.</p>
    </div>
 
