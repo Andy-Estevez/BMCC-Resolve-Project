@@ -611,6 +611,10 @@ label {
 /* student home */
 /* ~~~~~~~~~~~~ */
 
+.due-date {
+    color: white;
+}
+
 .placeholder {
     background-color: white;
     color: black;

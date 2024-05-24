@@ -48,9 +48,19 @@
         
         include("config.php");
         include("functions.php");
+
+        $user_data = check_student_login($conn);
                    
         // SQL query to select top 10 assignments due soonest
-        $sql = "SELECT title, dueDate FROM assignments ORDER BY dueDate ASC LIMIT 10";
+        $sql = "SELECT *
+                FROM stutoassignmentmap AS staMap
+                LEFT JOIN assignments AS a
+                ON staMap.assignmentID = a.assignmentID
+                LEFT JOIN classes AS c
+                ON staMap.classID = c.classID
+                WHERE staMap.studentID = $user_data[studentID]
+                ORDER BY a.dueDate ASC LIMIT 10";
+
         $result = $conn->query($sql);
         
         // Fetch data and display in the format you want
@@ -58,17 +68,21 @@
             // Output data of each row
             while($row = $result->fetch_assoc()) {
                 // Output assignment title
+                echo("<a href='studentClass.php?cID=$row[classID]' class='classLink'>");
                 echo '<div class="assignment" style="padding: 10px; margin: 10px 0; border-radius: 20px; background-color: #002874;">';
                 echo '<h3 class="assignment-title">' . $row["title"] . '</h3>';
                 
                 // Output assignment due date
                 echo '<p class="due-date">Due: ' . $row["dueDate"] . '</p>';
+
+                // Output assignment class
+                echo("<p class='due-date'>Class: ".$row["name"]."</p>");
                 
                 // Output the countdown span
-                echo '<div class="countdown" id="countdown-' . $row["title"] . '"></div>';
+                //echo '<div class="countdown" id="countdown-' . $row["title"] . '"></div>';
                 
                 // JavaScript for countdown
-                echo '<script>';
+                /*echo '<script>';
                 echo 'function updateCountdown_' . $row["title"] . '() {';
                 echo '    const now = new Date();';
                 echo '    const dueDate = new Date("' . $row["dueDate"] . '");';
@@ -89,9 +103,10 @@
                 echo '';
                 echo 'setInterval(updateCountdown_' . $row["title"] . ', 1000);';
                 echo 'updateCountdown_' . $row["title"] . '(); // Initial call to update immediately';
-                echo '</script>';
+                echo '</script>';*/
                 
                 echo '</div>';
+                echo("</a>");
             }
         } else {
             echo "0 results";
