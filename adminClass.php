@@ -74,7 +74,7 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
     <!------------->
 
     <div class='classInfo'>
-        <button class='assignmentCornerButton classAnnouncements' onclick='location.href="sendClassAnnouncement.php?cID=<?php echo $classID; ?>"'></button>
+        <button class='assignmentCornerButton classAnnouncements' onclick='location.href=""'></button>
         <p class='classesBlockHeader'>
             <strong>Class</strong>: <?php echo $classInfo['name']; ?> // 
             <strong>Section</strong>: <?php echo $classInfo['section']; ?> // 
@@ -146,14 +146,14 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
 
             // Submission View Button
             echo("
-                    <button type='button' class='assignmentButton' onclick='location.href=\"AssignmentSubmissions.php?aID=$assignment[assignmentID]\"'>See Submissions</button>
+                    <button type='button' class='assignmentButton' onclick='location.href=\"\"'>See Submissions</button>
                 </div>
             ");
         }
     }
     else {
         // Display No Assignments Message
-        echo("<h3 style='position: absolute; top: 55%; left: 50%; transform: translate(-50%, 0)'>You have not created any assignments.</h3>");
+        echo("<h3 style='position: absolute; top: 55%; left: 50%; transform: translate(-50%, 0)'>There are no assignments for this class.</h3>");
     }
     ?>
 </body>

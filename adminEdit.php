@@ -5,6 +5,7 @@ include("config.php");
 include("functions.php");
 
 $user_data = check_admin_login($conn);
+$classID = $_GET["cID"];
 
 // Check connection
 if ($conn->connect_error) {
@@ -26,13 +27,52 @@ if ($conn->connect_error) {
         <img class="BMCCLogo" src="Elements\bmcc-logo-resolve.png" alt="BMCC Logo" height="50px">
     </a>
     <div class="NavButtonsContainer">
-        <button type="button" class="navButton" onclick="location.href='adminHome.php'">Home</button>
-        <button type="button" class="navButton" onclick="location.href='adminConsoleClasses.php'">Console</button>
-        <button type="button" class="navButton" onclick="location.href='adminProfile.php'">Profile</button>
-        <button type="button" class="navButton" id="login" onclick="location.href='logout.php'">Log Out</button>
+        <button type="button" class="navButton" onclick="location.href='adminClass.php?cID=<?php echo($classID)?>'">Return</button>
     </div>
 </nav>
 
+<?php
+            // Fetch Class Info
+            $classQuery = "SELECT * 
+                           FROM classes AS c
+                           WHERE $classID = c.classID";
+
+            $classResult = mysqli_query($conn, $classQuery);
+
+            // Verify Query
+            if (!$classResult)
+                die("ERROR: Could not acquire class & faculty data for info banner of class with ID " + $classID);
+
+            $classInfo = mysqli_fetch_assoc($classResult);
+
+            $classSemester = $classInfo["semester"];
+
+            // Fetch Class' Student Count
+            $studentCountQuery = "SELECT COUNT(*) AS count
+                                  FROM stutoclassmap AS stcMap
+                                  WHERE stcMap.classID = $classID";
+
+            $studentCountResult = mysqli_query($conn, $studentCountQuery);
+
+            // Verify Query
+            if (!$studentCountResult)
+                die("ERROR: Could not acquire student count for class " + $classInfo[name]);
+
+            $studentCount = mysqli_fetch_assoc($studentCountResult);
+
+            // Display Class Info Banner
+            echo("
+                <div class='classInfo student'>
+                    <p class='classesBlockHeader'>
+                        <strong>Class</strong>: $classInfo[name] // 
+                        <strong>Section</strong>: $classInfo[section] // 
+                        <strong>Semester</strong>: $classInfo[semester] // 
+                        <strong>Year</strong>: $classInfo[year] // 
+                        <strong>Students</strong>: $studentCount[count]
+                    </p>
+                </div>
+            ");
+        ?>
 
 <div class="addClassFormDiv assignmentAdder">
     <p class="loginHeader">Swap Faculty </p>

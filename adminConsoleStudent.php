@@ -104,12 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
 
                         echo("
-                            <a href='adminStudentView.php?studentID=$assignedStudent[studentID]' class='classLink'>
-                                <div class='studentBlockItem'>
-                                    <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
-                                    <h4 class='classBlockItemInfo'>Classes: $classCount</h4>
-                                </div>
-                            </a>
+                            <div class='studentBlockItem'>
+                                <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
+                                <h4 class='classBlockItemInfo'>Classes: $classCount</h4>
+                            </div>
                             <hr>
                         ");
                     }

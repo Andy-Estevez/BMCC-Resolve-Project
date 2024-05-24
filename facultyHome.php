@@ -23,7 +23,6 @@
   <div class="container">
   <div class="flex-item-1">
     <h2 id="welcome-title">Faculty Homepage</h2>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis explicabo laudantium a officiis similique beatae asperiores, nemo est iure eaque eius ab numquam neque delectus perspiciatis expedita mollitia ipsum porro.</p>
   </div>
 
   <div class="flex-item-2">
