@@ -22,7 +22,7 @@
 
   <div class="container">
   <div class="flex-item-1">
-    <h2 id="welcome-title">Administrator Homepage</h2>
+    <h2 id="welcome-title">Administrator Homepage (Under Construction)</h2>
   </div>
     <?php
         // PHP / Data Set Up

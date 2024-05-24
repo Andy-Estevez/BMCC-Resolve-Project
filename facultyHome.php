@@ -22,7 +22,7 @@
 
   <div class="container">
   <div class="flex-item-1">
-    <h2 id="welcome-title">Faculty Homepage</h2>
+    <h2 id="welcome-title">Faculty Homepage (Under Construction)</h2>
   </div>
 
   <div class="flex-item-2">
