@@ -125,7 +125,7 @@
 
                             // Append Student To List
                             echo("
-                                <a href='facultyStudentView.php?cID=$assignedStudent[studentID]' class='classLink'>
+                                <a href='facultyStudentView.php?sID=$assignedStudent[studentID]' class='classLink'>
                                     <div class='classBlockItem'>
                                         <h4 class='classBlockItemInfo'><strong>$assignedStudent[username]</strong> (Student ID: $assignedStudent[studentID] | Email: $assignedStudent[email])</h4>
                                         <h4 class='classBlockItemInfo'>Classes: $classCount[count]</h4>

@@ -72,8 +72,9 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
     <!------------->
     <!-- Content -->
     <!------------->
+
     <div class='classInfo'>
-        <button class='assignmentCornerButton classSettings' onclick='location.href="adminEdit.php?cID=<?php echo $classID; ?>"'></button>
+        <button class='assignmentCornerButton classAnnouncements' onclick='location.href="sendClassAnnouncement.php?cID=<?php echo $classID; ?>"'></button>
         <p class='classesBlockHeader'>
             <strong>Class</strong>: <?php echo $classInfo['name']; ?> // 
             <strong>Section</strong>: <?php echo $classInfo['section']; ?> // 
@@ -81,7 +82,7 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
             <strong>Year</strong>: <?php echo $classInfo['year']; ?> // 
             <strong>Students</strong>: <?php echo $studentCount['count']; ?>
         </p>
-        <button class='assignmentCornerButton classAnnouncements' onclick='location.href="sendClassAnnouncement.php?cID=<?php echo $classID; ?>"'></button>
+        <button class='assignmentCornerButton classSettings' onclick='location.href="adminEdit.php?cID=<?php echo $classID; ?>"'></button>
     </div>
 
     <?php
@@ -100,11 +101,7 @@ $studentCount = mysqli_fetch_assoc($studentCountResult);
             // Display Assignment
             echo("
                 <div class='assignmentBlock'>
-                    <div class='assignmentBlockHead'>
-                        <button class='assignmentCornerButton assignmentNotifications' onclick='location.href=\"sendAssignmentReminder.php?aID=$assignment[assignmentID]\"'></button>
-                        <h2 class='classBlockItemInfo'>$assignment[title]</h2>
-                        <button class='assignmentCornerButton assignmentSettings' onclick='location.href=\"facultyEditAssigment.php?aID=$assignment[assignmentID]\"'></button>
-                    </div>
+                    <h2 class='classBlockItemInfo'>$assignment[title]</h2>
                     
                     <div class='assignmentBlockBody'>
                         <h4 class='assignmentText'>Assignment Description:</h4>
