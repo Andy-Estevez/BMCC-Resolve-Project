@@ -24,64 +24,12 @@
   <div class="flex-item-1">
     <h2 id="welcome-title">Administrator Homepage</h2>
   </div>
-
-  <div class="flex-item-2">
-    <h2 id="assignments-title">Pressing Assignments</h2>
-      <hr>
     <?php
         // PHP / Data Set Up
         session_start();
         
         include("config.php");
         include("functions.php");
-           
-        // SQL query to select top 10 assignments due soonest
-        $sql = "SELECT title, dueDate FROM assignments ORDER BY dueDate ASC LIMIT 10";
-        $result = $conn->query($sql);
-        
-        // Fetch data and display in the format you want
-        if ($result && $result->num_rows > 0) {
-            // Output data of each row
-            while($row = $result->fetch_assoc()) {
-                // Output assignment title
-                echo '<div class="assignment" style="padding: 10px; margin: 10px 0; border-radius: 20px; background-color: #002874;">';
-                echo '<h3 class="assignment-title">' . $row["title"] . '</h3>';
-                
-                // Output assignment due date
-                echo '<p class="due-date">Due: ' . $row["dueDate"] . '</p>';
-                
-                // Output the countdown span
-                echo '<div class="countdown" id="countdown-' . $row["title"] . '"></div>';
-                
-                // JavaScript for countdown
-                echo '<script>';
-                echo 'function updateCountdown_' . $row["title"] . '() {';
-                echo '    const now = new Date();';
-                echo '    const dueDate = new Date("' . $row["dueDate"] . '");';
-                echo '    const diffInMs = dueDate - now;';
-                echo '';
-                echo '    if (diffInMs <= 0) {';
-                echo '        document.getElementById("countdown-' . $row["title"] . '").textContent = "Due";';
-                echo '    } else {';
-                echo '        const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));';
-                echo '        const hours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));';
-                echo '        const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));';
-                echo '        const seconds = Math.floor((diffInMs % (1000 * 60)) / 1000);';
-                echo '';
-                echo '        const formattedTime = days + "d " + hours + "h " + minutes + "m " + seconds + "s";';
-                echo '        document.getElementById("countdown-' . $row["title"] . '").textContent = formattedTime;';
-                echo '    }';
-                echo '}';
-                echo '';
-                echo 'setInterval(updateCountdown_' . $row["title"] . ', 1000);';
-                echo 'updateCountdown_' . $row["title"] . '(); // Initial call to update immediately';
-                echo '</script>';
-                
-                echo '</div>';
-            }
-        } else {
-            echo "0 results";
-        }
         ?>
   </div>
 </div>
