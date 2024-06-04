@@ -69,7 +69,7 @@
 
             // Verify Query
             if (!$studentCountResult)
-                die("ERROR: Could not acquire student count for class " + $classInfo[name]);
+                die("ERROR: Could not acquire student count for class ".$classInfo["name"]);
 
             $studentCount = mysqli_fetch_assoc($studentCountResult);
 
@@ -137,7 +137,7 @@
 
                     // Verify Query
                     if (!$assignmentStudentCountResult)
-                        die("ERROR: Could not acquire student count for assignment " + $assignment[name]);
+                        die("ERROR: Could not acquire student count for assignment ".$assignment["name"]);
 
                     $assignmentStudentCount = mysqli_fetch_assoc($assignmentStudentCountResult);
 
@@ -151,7 +151,7 @@
 
                     // Verify Query
                     if (!$pendingSubmissionCountResult)
-                        die("ERROR: Could not acquire pending submission count for assignment " + $assignment[name]);
+                        die("ERROR: Could not acquire pending submission count for assignment ".$assignment["name"]);
 
                     $pendingSubmissionCount = mysqli_fetch_assoc($pendingSubmissionCountResult);
 

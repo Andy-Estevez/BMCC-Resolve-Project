@@ -90,7 +90,7 @@
 
             // Verify Query
             if (!$studentCountResult)
-                die("ERROR: Could not acquire student count for class " + $classInfo[name]);
+                die("ERROR: Could not acquire student count for class " + $classInfo["name"]);
 
             $studentCount = mysqli_fetch_assoc($studentCountResult);
 
@@ -154,7 +154,7 @@
                                 $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
     
                                 if (!$studentInfoResult) {
-                                    die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+                                    die("ERROR: Could not get info for student of ID " + $submission["studentID"]);
                                 }
     
                                 $student = mysqli_fetch_assoc($studentInfoResult);
@@ -206,7 +206,7 @@
                                 $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
     
                                 if (!$studentInfoResult) {
-                                    die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+                                    die("ERROR: Could not get info for student of ID " + $submission["studentID"]);
                                 }
     
                                 $student = mysqli_fetch_assoc($studentInfoResult);
@@ -263,7 +263,7 @@
                                 $studentInfoResult = mysqli_query($conn, $studentInfoQuery);
     
                                 if (!$studentInfoResult) {
-                                    die("ERROR: Could not get info for student of ID " + $submission[studentID]);
+                                    die("ERROR: Could not get info for student of ID " + $submission["studentID"]);
                                 }
     
                                 $student = mysqli_fetch_assoc($studentInfoResult);

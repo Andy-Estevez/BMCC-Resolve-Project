@@ -126,7 +126,7 @@
 
             // Verify Query
             if (!$studentCountResult)
-                die("ERROR: Could not acquire student count for class " + $classInfo[name]);
+                die("ERROR: Could not acquire student count for class " + $classInfo["name"]);
 
             $studentCount = mysqli_fetch_assoc($studentCountResult);
 

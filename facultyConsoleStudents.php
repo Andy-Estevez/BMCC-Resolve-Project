@@ -119,7 +119,7 @@
 
                         // Verify Query
                         if (!($classCountResult))
-                            die("ERROR: Could not acquire class count for student " + $assignedStudent[name]);
+                            die("ERROR: Could not acquire class count for student " + $assignedStudent["name"]);
                         else {
                             $classCount = mysqli_fetch_assoc($classCountResult);
 
